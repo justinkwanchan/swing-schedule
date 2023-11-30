@@ -7,7 +7,7 @@ const AWS = require('aws-sdk');
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.signup = async (event) => {
-  const { email, password } = event;
+  const { email, password } = JSON.parse(event.body);
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const queryParams = {
@@ -57,7 +57,7 @@ module.exports.signup = async (event) => {
 };
 
 module.exports.login = async (event) => {
-  const { email, password } = event;
+  const { email, password } = JSON.parse(event.body);
 
   const queryParams = {
     TableName: process.env.TableName,

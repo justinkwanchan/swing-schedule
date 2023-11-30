@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "870e5b9e-d48a-441e-90a1-7a2ab884b921",
+		"name": "Montreal Swing Calendar API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6100157"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nicholas.ac.tran@gmail.com\",\r\n    \"password\": \"HelloWorld\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/signup",
+					"protocol": "https",
+					"host": [
+						"58vzjkrur5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"nicholas.ac.tran@gmail.com\",\r\n    \"password\": \"HelloWorld\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/login",
+					"protocol": "https",
+					"host": [
+						"58vzjkrur5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
