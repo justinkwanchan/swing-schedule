@@ -17,6 +17,16 @@ export default function PreviewSection({ title }: Props) {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
+  const tempEvent = {
+    id: 'id',
+    image: 'image',
+    datetime: 'FRI OCT 16 @ 7:30PM',
+    title: "Cat's Corner Weekly Dance",
+    organizer: "Cat's Corner",
+    location: 'Polish White Eagle Society',
+    address: '1956 Rue Frontenac, Montréal, QC H2K 2Z1',
+  };
+
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
     setScrollProgress(progress * 80);
@@ -89,11 +99,11 @@ export default function PreviewSection({ title }: Props) {
 
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container flex -ml-8">
-          <DanceEventPreviewCard />
-          <DanceEventPreviewCard />
-          <DanceEventPreviewCard />
-          <DanceEventPreviewCard />
-          <DanceEventPreviewCard />
+          <DanceEventPreviewCard event={tempEvent} />
+          <DanceEventPreviewCard event={tempEvent} />
+          <DanceEventPreviewCard event={tempEvent} />
+          <DanceEventPreviewCard event={tempEvent} />
+          <DanceEventPreviewCard event={tempEvent} />
         </div>
       </div>
     </div>
