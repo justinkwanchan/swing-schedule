@@ -19,7 +19,7 @@ export default function DanceEventPreviewCard({ event }: Props) {
         <br />
         {address}
         <br />
-        <Link href={''} className="underline text-cyan-400">
+        <Link href={`events/${id}`} className="underline text-cyan-400">
           More info
         </Link>
       </p>

@@ -18,7 +18,7 @@ export default function PreviewSection({ title }: Props) {
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
   const tempEvent = {
-    id: 'id',
+    id: 'cats78',
     image: 'image',
     datetime: 'FRI OCT 16 @ 7:30PM',
     title: "Cat's Corner Weekly Dance",
