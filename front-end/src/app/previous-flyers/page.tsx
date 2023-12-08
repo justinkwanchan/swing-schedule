@@ -1,4 +1,4 @@
-import PreviousFlyerCard from '../components/home/previous-flyers-section/previous-flyer-card';
+import PreviousFlyerCard from '../components/home/previous-flyer-card';
 import PageTitleSection from '../components/page-title-section';
 import splotch from 'public/splotch-home.svg';
 

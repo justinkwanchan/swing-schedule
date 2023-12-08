@@ -3,15 +3,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import DanceEventPreviewCard from '../dance-event-preview-card';
+import PreviousFlyerCard from '../previous-flyer-card';
 import carouselScrollBack from 'public/carousel-scroll-back.svg';
 import carouselScrollForward from 'public/carousel-scroll-forward.svg';
+import { SOCIAL_DANCES } from '@/lib/constants';
 
 import styles from '../Carousel.module.css';
 
 type Props = {
-  title: string;
+  title: 'Upcoming Social Dances' | 'Previous Flyers';
 };
 
 export default function PreviewSection({ title }: Props) {
@@ -64,7 +67,16 @@ export default function PreviewSection({ title }: Props) {
   return (
     <div className="embla overflow-hidden">
       <div className="flex justify-between">
-        <h1 className="font-bold text-xl">{title}</h1>
+        <div className="flex">
+          <h1 className="font-bold text-xl mr-4">{title}</h1>
+          <Link
+            href={title === SOCIAL_DANCES ? '/events' : '/previous-flyers'}
+            className="underline text-cyan-400 text-sm self-center"
+          >
+            View all
+          </Link>
+        </div>
+
         <div>
           <button
             onClick={scrollPrev}
@@ -100,11 +112,22 @@ export default function PreviewSection({ title }: Props) {
 
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container flex -ml-8">
-          <DanceEventPreviewCard event={tempEvent} />
-          <DanceEventPreviewCard event={tempEvent} />
-          <DanceEventPreviewCard event={tempEvent} />
-          <DanceEventPreviewCard event={tempEvent} />
-          <DanceEventPreviewCard event={tempEvent} />
+          {title === SOCIAL_DANCES ? (
+            <>
+              <DanceEventPreviewCard event={tempEvent} />
+              <DanceEventPreviewCard event={tempEvent} />
+              <DanceEventPreviewCard event={tempEvent} />
+              <DanceEventPreviewCard event={tempEvent} />
+              <DanceEventPreviewCard event={tempEvent} />
+            </>
+          ) : (
+            <>
+              <PreviousFlyerCard dates="OCT 8 - OCT 14" />
+              <PreviousFlyerCard dates="OCT 1 - OCT 7" />
+              <PreviousFlyerCard dates="OCT 24 - OCT 30" />
+              <PreviousFlyerCard dates="OCT 31 - NOV 6" />
+            </>
+          )}
         </div>
       </div>
     </div>
