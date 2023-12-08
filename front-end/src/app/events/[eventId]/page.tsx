@@ -46,8 +46,8 @@ export default async function Event({
 
       <div className="w-11/12">
         <div className="flex relative md:static justify-between border-b border-black pb-8 mb-12">
-          <div>
-            <h2 className="mb-4 text-4xl text-red-500">
+          <div className="flex flex-col justify-between">
+            <h2 className="text-4xl text-red-500">
               MON, NOV 4 FROM 8:15PM - 11:30PM
             </h2>
             <div className="flex items-center text-3xl">
