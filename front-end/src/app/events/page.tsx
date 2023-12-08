@@ -1,6 +1,5 @@
 import PageTitleSection from '@/app/components/page-title-section';
 import DanceEventPreviewCard from '../components/home/dance-event-preview-card';
-import splotch from 'public/splotch.svg';
 
 export default function Events() {
   const tempEvent = {
@@ -15,7 +14,7 @@ export default function Events() {
 
   return (
     <div className="flex flex-col items-center mb-12">
-      <PageTitleSection splotch={splotch} />
+      <PageTitleSection title="Upcoming" />
 
       <div className="flex flex-wrap w-4/5 mb-12 gap-y-12 -ml-8">
         <DanceEventPreviewCard event={tempEvent} />

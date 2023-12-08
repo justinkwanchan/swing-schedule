@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import PageTitleSection from '@/app/components/page-title-section';
-import splotch from 'public/splotch.svg';
 import danceDude from 'public/dance-dude.svg';
 import locationPin from 'public/location-pin.svg';
 
@@ -43,7 +42,7 @@ export default async function Event({
 
   return (
     <div className="flex flex-col items-center mb-12">
-      <PageTitleSection splotch={splotch} />
+      <PageTitleSection title="Swing Lapin Weekly Dance" />
 
       <div className="w-11/12">
         <div className="flex relative md:static justify-between border-b border-black pb-8 mb-12">

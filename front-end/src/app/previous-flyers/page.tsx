@@ -1,11 +1,10 @@
 import PreviousFlyerCard from '../components/home/previous-flyer-card';
 import PageTitleSection from '../components/page-title-section';
-import splotch from 'public/splotch-home.svg';
 
 export default function PreviousFlyers() {
   return (
     <div className="flex flex-col items-center mb-12">
-      <PageTitleSection splotch={splotch} />
+      <PageTitleSection title="Previous Flyers" />
 
       <div className="flex flex-wrap -ml-8 gap-y-8 w-4/5">
         <PreviousFlyerCard dates="OCT 8 - OCT 14" />
