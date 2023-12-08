@@ -6,19 +6,18 @@ type Props = {
 
 export default function PageTitleSection({ splotch }: Props) {
   return (
-    <section className="flex flex-col md:flex-row h-[calc(100svh-62px)] w-full mb-12">
-      <div className="bg-light-grey relative h-[70vw] md:h-auto md:w-2/5 2xl:w-1/3">
+    <section className="flex flex-col md:flex-row h-[calc(80svh-62px)] w-full mb-12">
+      <div className="flex relative bg-light-grey h-[70vw] md:h-auto md:w-3/5">
         <Image
           src={splotch}
           alt={'Splotchy Frame'}
-          className="absolute top-16 left-4 md:top-8 md:left-8 z-10 w-[75%] md:w-[100%]"
+          className="m-auto w-[75%] md:w-4/5 h-[90%]"
         />
-        <div className="md:h-[50vw] lg:h-[45vw] 2xl:h-[35vw]"></div>
-        <p className="pl-[40%] pt-4 pr-4 sm:pt-8 sm:pr-8 md:px-12">
-          Find dance classes, social events, dance studios, and performances for
-          all levels of experience in Montreal.
-        </p>
+        <h1 className="text-8xl text-center font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[33%] w-4/5">
+          Swing Lapin Weekly Dance
+        </h1>
       </div>
+
       <div className="bg-dark-grey h-[calc(60svh-64px)] md:h-auto grow"></div>
     </section>
   );
