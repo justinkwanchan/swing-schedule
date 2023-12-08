@@ -9,12 +9,12 @@ import DanceEventPreviewCard from '../dance-event-preview-card';
 import PreviousFlyerCard from '../previous-flyer-card';
 import carouselScrollBack from 'public/carousel-scroll-back.svg';
 import carouselScrollForward from 'public/carousel-scroll-forward.svg';
-import { SOCIAL_DANCES } from '@/lib/constants';
+import { SOCIAL_DANCES, PREVIOUS_FLYERS } from '@/lib/constants';
 
 import styles from '../Carousel.module.css';
 
 type Props = {
-  title: 'Upcoming Social Dances' | 'Previous Flyers';
+  title: typeof SOCIAL_DANCES | typeof PREVIOUS_FLYERS;
 };
 
 export default function PreviewSection({ title }: Props) {
