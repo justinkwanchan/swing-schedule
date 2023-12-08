@@ -1,6 +1,7 @@
-import PageTitleSection from '@/app/components/page-title-section';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import PageTitleSection from '@/app/components/page-title-section';
 import splotch from 'public/splotch.svg';
 import danceDude from 'public/dance-dude.svg';
 import locationPin from 'public/location-pin.svg';
