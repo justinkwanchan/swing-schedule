@@ -23,9 +23,8 @@ export default function Navbar({
       {/* Middle - Desktop Menu */}
       <div className="hidden md:flex justify-between md:w-2/3 lg:w-1/2">
         <Link href="/">HOME</Link>
-        <Link href="/events">ALL EVENTS</Link>
+        <Link href="/events">UPCOMING EVENTS</Link>
         <Link href="/contribute">HOW TO CONTRIBUTE</Link>
-        <Link href="/large-events">LARGE EVENTS</Link>
       </div>
 
       {/* Right Side */}
