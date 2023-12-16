@@ -54,8 +54,8 @@ export default async function Event({
     <div className="flex flex-col items-center mb-12">
       <PageTitleSection title="Swing Lapin Weekly Dance" />
 
-      <div className="w-11/12">
-        <div className="flex relative md:static justify-between border-b border-black pb-8 mb-12">
+      <div className="flex flex-col w-11/12 gap-12">
+        <div className="flex relative md:static justify-between border-b border-black pb-8">
           <div className="flex flex-col justify-between">
             <h2 className="text-4xl text-red-500">
               MON, NOV 4 FROM 8:15PM - 11:30PM
@@ -74,7 +74,7 @@ export default async function Event({
               href="https://www.facebook.com/swinglapinlundi"
               target="_blank"
             >
-              <button className="absolute right-0 -top-20 font-bold bg-[#BDFFF3] mb-4 px-8 py-4 rounded-2xl shadow-[4px_6px_8px_0_rgba(0,0,0,0.25)] md:static">
+              <button className="absolute right-0 -top-20 font-bold bg-[#BDFFF3] w-max mb-4 px-8 py-4 rounded-2xl shadow-[4px_6px_8px_0_rgba(0,0,0,0.25)] md:static">
                 Visit Website
               </button>
             </Link>
@@ -83,7 +83,7 @@ export default async function Event({
         </div>
 
         <div className="flex flex-col md:flex-row">
-          <div className="w-[55%] pr-16">
+          <div className="md:w-[55%] pr-16">
             <h1 className="text-5xl mb-16">About the Event</h1>
             <p className="text-xl">
               Knights of Ni, we are but simple travelers who seek the enchanter
@@ -102,12 +102,21 @@ export default async function Event({
               farcical aquatic ceremony.
             </p>
           </div>
-          <Image src={danceDude} alt={'Dancing Dude'} className="w-[45%]" />
+          <Image src={danceDude} alt={'Dancing Dude'} className="md:w-[45%]" />
         </div>
 
-        {/* Alter map dimensions in src/app/components/map/Map.tsx */}
-        <div className="h-max">
-          <Map center={coordinates} />
+        {/* Alter map height in src/app/components/map/Map.tsx */}
+        <div className="flex flex-col md:flex-row gap-8 md:bg-light-grey rounded-lg p-6">
+          <div className="md:w-1/4">
+            <h2 className="text-4xl font-medium mb-4">Location</h2>
+            <p className="text-3xl mb-12">La Cenne</p>
+            <p className="text-3xl">
+              7755 St Laurent Blvd Suite 300, Montreal, Quebec H2R 1X1
+            </p>
+          </div>
+          <div className="self-center w-full h-max">
+            <Map center={coordinates} />
+          </div>
         </div>
       </div>
     </div>
