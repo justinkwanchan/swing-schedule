@@ -5,6 +5,9 @@ import PageTitleSection from '@/app/components/page-title-section';
 import danceDude from 'public/dance-dude.svg';
 import locationPin from 'public/location-pin.svg';
 
+import Map from '@/app/components/map';
+import getCoords from '@/lib/getCoords';
+
 // export function generateStaticParams() {
 //     const posts = getSortedPostsData()
 
@@ -39,6 +42,8 @@ export default async function Event({
   const { eventId } = params;
 
   // if (!events.find((event) => event.id === eventId)) notFound();
+
+  const coordinates = await getCoords();
 
   return (
     <div className="flex flex-col items-center mb-12">
@@ -93,6 +98,10 @@ export default async function Event({
             </p>
           </div>
           <Image src={danceDude} alt={'Dancing Dude'} className="w-[45%]" />
+        </div>
+
+        <div className="h-max">
+          <Map center={coordinates} />
         </div>
       </div>
     </div>
