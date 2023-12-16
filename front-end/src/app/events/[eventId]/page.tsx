@@ -115,7 +115,7 @@ export default async function Event({
             </p>
           </div>
           <div className="self-center w-full h-max">
-            <Map center={coordinates} />
+            <Map coordinates={coordinates} />
           </div>
         </div>
       </div>

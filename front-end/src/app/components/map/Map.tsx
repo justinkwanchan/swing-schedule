@@ -4,14 +4,14 @@ import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 
 type Props = {
-  center: [number, number];
+  coordinates: [number, number];
 };
 
-export default function Map({ center }: Props) {
+export default function Map({ coordinates }: Props) {
   return (
     <MapContainer
       className="w-full h-72"
-      center={center}
+      center={coordinates}
       zoom={17}
       scrollWheelZoom={false}
     >
@@ -19,7 +19,7 @@ export default function Map({ center }: Props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={center} interactive={false} />
+      <Marker position={coordinates} interactive={false} />
     </MapContainer>
   );
 }
