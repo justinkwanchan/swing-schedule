@@ -1,15 +1,21 @@
-export default async function getCoords(): Promise<[number, number]> {
+type Address = {
+  street: string;
+  city: string;
+};
+
+export default async function getCoords(
+  address: Address
+): Promise<[number, number]> {
   const data = {
-    street: '7755 st laurent',
-    city: 'montreal',
+    ...address,
     country: 'canada',
     format: 'json',
   };
 
-  const searchParams2 = new URLSearchParams(data);
+  const searchParams = new URLSearchParams(data);
 
   const res = await fetch(
-    `https://nominatim.openstreetmap.org/search?${searchParams2}`
+    `https://nominatim.openstreetmap.org/search?${searchParams}`
   );
 
   if (!res.ok) throw new Error('Failed to fetch coordinates');

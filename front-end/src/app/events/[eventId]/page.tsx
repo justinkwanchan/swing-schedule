@@ -43,7 +43,12 @@ export default async function Event({
 
   // if (!events.find((event) => event.id === eventId)) notFound();
 
-  const coordinates = await getCoords();
+  const address = {
+    street: '7755 st laurent',
+    city: 'montreal',
+  };
+
+  const coordinates = await getCoords(address);
 
   return (
     <div className="flex flex-col items-center mb-12">
@@ -100,6 +105,7 @@ export default async function Event({
           <Image src={danceDude} alt={'Dancing Dude'} className="w-[45%]" />
         </div>
 
+        {/* Alter map dimensions in src/app/components/map/Map.tsx */}
         <div className="h-max">
           <Map center={coordinates} />
         </div>
