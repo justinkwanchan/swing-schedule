@@ -1,13 +1,10 @@
-type Address = {
-  street: string;
-  city: string;
-};
-
 export default async function getCoords(
-  address: Address
+  street: string,
+  city: string
 ): Promise<[number, number]> {
   const data = {
-    ...address,
+    street,
+    city,
     country: 'canada',
     format: 'json',
   };
@@ -18,9 +15,9 @@ export default async function getCoords(
     `https://nominatim.openstreetmap.org/search?${searchParams}`
   );
 
-  if (!res.ok) throw new Error('Failed to fetch coordinates');
-
   const [response] = await res.json();
+
+  if (!res.ok || !response) throw new Error('Failed to fetch coordinates');
 
   return [response.lat, response.lon];
 }
