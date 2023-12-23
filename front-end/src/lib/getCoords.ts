@@ -15,9 +15,11 @@ export default async function getCoords(
     `https://nominatim.openstreetmap.org/search?${searchParams}`
   );
 
+  if (!res.ok) throw new Error('Fetch request failed');
+
   const [response] = await res.json();
 
-  if (!res.ok || !response) throw new Error('Failed to fetch coordinates');
+  if (!response) throw new Error('Failed to fetch coordinates');
 
   return [response.lat, response.lon];
 }
