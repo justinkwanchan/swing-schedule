@@ -8,7 +8,7 @@ export default function Hamburger({
   return (
     <button
       onClick={handleClick}
-      className={`h-8 flex flex-col justify-center items-center transition-all duration-300 md:hidden ${
+      className={`h-[30px] flex flex-col justify-center items-center transition-all duration-300 md:hidden ${
         isOpen ? 'rotate-90' : ''
       }`}
     >
