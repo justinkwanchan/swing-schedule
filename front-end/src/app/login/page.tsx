@@ -1,3 +1,5 @@
+import LoginForm from '../components/login-form';
+
 export default function Login() {
-  return <div>Login</div>;
+  return <LoginForm isRegister={false} />;
 }
