@@ -12,6 +12,7 @@ const config: Config = {
         'light-grey': '#eff1f3',
         'dark-grey': '#4d4d4d',
         'sub-text-grey': '#515151',
+        'aero-blue': '#BDFFF3',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import splotch from 'public/splotch-home.svg';
+import Flyer from '../../flyer';
 
 export default function HomeTitleSection() {
   return (
@@ -16,7 +17,7 @@ export default function HomeTitleSection() {
           all levels of experience in Montreal.
         </p>
       </div>
-      <div className="bg-dark-grey h-[calc(60svh-64px)] md:h-auto grow"></div>
+      <Flyer />
     </section>
   );
 }
