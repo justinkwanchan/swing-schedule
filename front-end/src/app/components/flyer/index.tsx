@@ -57,8 +57,8 @@ export default function Flyer() {
       </h1>
       <div className="flex flex-col">
         {danceData.map((event, index, arr) => (
-          <>
-            <div key={event.id} className="flex h-24 2xl:h-[6.5rem]">
+          <div key={event.id} className="flex flex-col">
+            <div className="flex h-24 2xl:h-[6.5rem]">
               <h2 className="self-center w-40 font-medium text-3xl ml-4 2xl:text-4xl">
                 {event.day}
               </h2>
@@ -72,7 +72,7 @@ export default function Flyer() {
             {index !== arr.length - 1 && (
               <div className="self-end w-11/12 h-[1px] bg-slate-300"></div>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>
