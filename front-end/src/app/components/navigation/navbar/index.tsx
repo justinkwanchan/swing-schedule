@@ -4,6 +4,8 @@ import Hamburger from './Hamburger';
 import instagramIcon from 'public/instagram-icon.svg';
 import MontrealIcon from '../../svg/MontrealIcon';
 
+import { usePathname } from 'next/navigation';
+
 export default function Navbar({
   isOpen,
   toggleOpen,
@@ -11,6 +13,8 @@ export default function Navbar({
   isOpen: boolean;
   toggleOpen: () => void;
 }) {
+  const pathName = usePathname();
+
   return (
     <nav className="bg-white mx-auto p-4 flex justify-between items-center sticky top-0 z-40">
       {/* Left Side */}
@@ -22,9 +26,21 @@ export default function Navbar({
 
       {/* Middle - Desktop Menu */}
       <div className="hidden md:flex justify-between md:w-2/3 lg:w-1/2">
-        <Link href="/">HOME</Link>
-        <Link href="/events">UPCOMING EVENTS</Link>
-        <Link href="/contribute">HOW TO CONTRIBUTE</Link>
+        <Link href="/" className={pathName === '/' ? 'font-medium' : ''}>
+          HOME
+        </Link>
+        <Link
+          href="/events"
+          className={pathName === '/events' ? 'font-medium' : ''}
+        >
+          UPCOMING EVENTS
+        </Link>
+        <Link
+          href="/contribute"
+          className={pathName === '/contribute' ? 'font-medium' : ''}
+        >
+          HOW TO CONTRIBUTE
+        </Link>
       </div>
 
       {/* Right Side */}
@@ -34,7 +50,14 @@ export default function Navbar({
           alt={'Instagram Icon'}
           className="hidden md:block"
         />
-        <Link href="/login">LOGIN</Link>
+        <Link
+          href="/login"
+          className={
+            ['/login', '/register'].includes(pathName) ? 'font-medium' : ''
+          }
+        >
+          LOGIN
+        </Link>
       </div>
     </nav>
   );
