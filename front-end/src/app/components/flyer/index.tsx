@@ -51,7 +51,7 @@ export default function Flyer() {
     },
   ];
   return (
-    <div className="grow bg-gradient-to-r from-white via-aero-blue to-white">
+    <div className="grow bg-gradient-to-tr from-aero-blue from-10% via-white to-aero-blue to-90%">
       <h1 className="text-center bg-dark-grey text-aero-blue text-xl font-bold py-1 sm:text-3xl 2xl:text-5xl 2xl:py-3">
         November 11 - 17
       </h1>
