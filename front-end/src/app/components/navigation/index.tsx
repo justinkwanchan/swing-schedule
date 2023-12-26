@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import MobileNav from './mobile-nav';
 import Navbar from './navbar';
@@ -12,8 +13,8 @@ export default function Navigation() {
 
   return (
     <>
-      <MobileNav isOpen={isOpen} handleClick={toggleOpen} />
       <Navbar isOpen={isOpen} toggleOpen={toggleOpen} />
+      <MobileNav isOpen={isOpen} handleClick={toggleOpen} />
     </>
   );
 }

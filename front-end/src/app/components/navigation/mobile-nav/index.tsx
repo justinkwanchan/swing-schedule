@@ -12,11 +12,11 @@ export default function MobileNav({
       id="mobile-menu"
       className={`${
         isOpen ? 'flex' : 'hidden'
-      } top-16 justify-center absolute w-full origin-top animate-open-menu flex-col bg-black text-5xl z-50`}
+      } top-[62px] justify-center sticky w-full origin-top animate-open-menu flex-col bg-black text-5xl z-50`}
       onClick={handleClick}
     >
       <nav
-        className="flex min-h-screen flex-col items-center py-8 gap-32 text-white"
+        className="flex h-[calc(100svh-62px)] flex-col items-center py-8 gap-32 text-white"
         aria-label="mobile"
       >
         <Link href="/" className="w-full text-center pt-32 hover:opacity-90">
