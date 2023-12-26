@@ -32,6 +32,9 @@ export default function MobileNav({
           HOW TO CONTRIBUTE
         </Link>
       </nav>
+
+      {/* Hide the upper portion of the splotch on opening animation */}
+      <div className="h-16"></div>
     </section>
   );
 }
