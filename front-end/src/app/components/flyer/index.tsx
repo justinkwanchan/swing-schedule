@@ -52,23 +52,27 @@ export default function Flyer() {
   ];
   return (
     <div className="grow bg-gradient-to-r from-white via-aero-blue to-white">
-      <h1 className="text-center bg-dark-grey text-aero-blue font-bold text-3xl py-1 2xl:text-5xl 2xl:py-3">
+      <h1 className="text-center bg-dark-grey text-aero-blue text-xl font-bold py-1 sm:text-3xl 2xl:text-5xl 2xl:py-3">
         November 11 - 17
       </h1>
       <div className="flex flex-col">
         {danceData.map((event, index, arr) => (
           <div key={event.id} className="flex flex-col">
-            <div className="flex h-24 2xl:h-[6.5rem]">
-              <h2 className="self-center w-40 font-medium text-3xl ml-4 2xl:text-4xl">
+            <div className="flex h-20 sm:h-24 2xl:h-[6.5rem]">
+              <h2 className="self-center w-40 font-medium text-xl ml-4 sm:text-3xl 2xl:text-4xl">
                 {event.day}
               </h2>
               <div>
-                <h2 className="text-red-500 font-medium text-xl mt-1 2xl:text-2xl">
+                <h2 className="text-red-500 font-medium mt-1 sm:text-xl 2xl:text-2xl">
                   {event.title}
                 </h2>
-                <p className="2xl:text-xl">{event.description}</p>
+                <p className="text-xs sm:text-base 2xl:text-xl">
+                  {event.description}
+                </p>
               </div>
             </div>
+
+            {/* Styled border between flyer entries */}
             {index !== arr.length - 1 && (
               <div className="self-end w-11/12 h-[1px] bg-slate-300"></div>
             )}
