@@ -154,11 +154,9 @@ export default function PreviewSection({ title }: Props) {
         <div className="embla__container flex mr-4 md:-ml-8 md:mr-0">
           {title === SOCIAL_DANCES ? (
             <>
-              <DanceEventPreviewCard event={tempEvents[0]} />
-              <DanceEventPreviewCard event={tempEvents[1]} />
-              <DanceEventPreviewCard event={tempEvents[2]} />
-              <DanceEventPreviewCard event={tempEvents[3]} />
-              <DanceEventPreviewCard event={tempEvents[4]} />
+              {tempEvents.map((tempEvent) => (
+                <DanceEventPreviewCard event={tempEvent} />
+              ))}
             </>
           ) : (
             <>
