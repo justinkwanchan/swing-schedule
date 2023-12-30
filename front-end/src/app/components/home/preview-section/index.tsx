@@ -105,7 +105,7 @@ export default function PreviewSection({ title }: Props) {
   return (
     <div className="embla overflow-hidden">
       <div className="flex justify-between">
-        <div className="flex">
+        <div className="flex w-11/12 mx-auto md:w-max md:mx-0">
           <h1 className="font-bold text-xl mr-4">{title}</h1>
           <Link
             href={title === SOCIAL_DANCES ? '/events' : '/previous-flyers'}
@@ -115,7 +115,7 @@ export default function PreviewSection({ title }: Props) {
           </Link>
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <button
             onClick={scrollPrev}
             disabled={prevBtnDisabled}
@@ -141,7 +141,9 @@ export default function PreviewSection({ title }: Props) {
         </div>
       </div>
 
-      <div className={styles.embla__progress}>
+      <div
+        className={`${styles.embla__progress} w-11/12 mx-auto md:w-full md:mx-0`}
+      >
         <div
           className={styles.embla__progress__bar}
           style={{ transform: `translateX(${scrollProgress}cqw)` }}
@@ -149,7 +151,7 @@ export default function PreviewSection({ title }: Props) {
       </div>
 
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container flex -ml-3 md:-ml-8">
+        <div className="embla__container flex mr-4 md:-ml-8 md:mr-0">
           {title === SOCIAL_DANCES ? (
             <>
               <DanceEventPreviewCard event={tempEvents[0]} />

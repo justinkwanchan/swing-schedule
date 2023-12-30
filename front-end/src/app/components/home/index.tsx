@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <HomeTitleSection />
 
-      <div className="flex flex-col w-4/5 mb-12 gap-12">
+      <div className="flex flex-col w-full md:w-4/5 mb-12 gap-12">
         <PreviewSection title={SOCIAL_DANCES} />
         <PreviewSection title={PREVIOUS_FLYERS} />
       </div>
