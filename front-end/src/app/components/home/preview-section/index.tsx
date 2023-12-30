@@ -23,15 +23,53 @@ export default function PreviewSection({ title }: Props) {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
 
-  const tempEvent = {
-    id: 'cats78',
-    image: 'image',
-    datetime: 'FRI OCT 16 @ 7:30PM',
-    title: "Cat's Corner Weekly Dance",
-    organizer: "Cat's Corner",
-    location: 'Polish White Eagle Society',
-    address: '1956 Rue Frontenac, Montréal, QC H2K 2Z1',
-  };
+  const tempEvents = [
+    {
+      id: 'lapin1',
+      image: 'image',
+      datetime: 'MON DEC 18 @ 8:15PM',
+      title: 'Swing Lapin Lundi',
+      organizer: 'Swing Lapin Lundi',
+      location: 'La Cenne',
+      address: '7755 St Laurent Blvd Suite 300, Montreal, Quebec H2R 1X1',
+    },
+    {
+      id: '88swing1',
+      image: 'image',
+      datetime: 'TUE JAN 2 @ 8:00PM',
+      title: 'Les Mardis 88-Swing Chez Ernest',
+      organizer: 'Studio 88 Swing',
+      location: 'Chez Ernest - Comptoir de curiosités',
+      address: '6596 Rue St-Hubert, Montreal, QC H2S 2M3',
+    },
+    {
+      id: 'cats1',
+      image: 'image',
+      datetime: 'FRI DEC 15 @ 7:30PM',
+      title: 'Downtown Stomp',
+      organizer: "Cat's Corner",
+      location: 'Polish White Eagle Society',
+      address: '1956 Rue Frontenac, Montréal, QC H2K 2Z1',
+    },
+    {
+      id: 'hochela1',
+      image: 'image',
+      datetime: 'WED JAN 3 @ 8:00PM',
+      title: 'Hochela SWING',
+      organizer: 'Hochela SWING',
+      location: 'Taverne Lady Davidson',
+      address: '3400 Ontario St E, Montreal, Quebec H1W 1P9',
+    },
+    {
+      id: 'bhc1',
+      image: 'image',
+      datetime: 'FRI JAN 12 @ 8:30PM',
+      title: 'Soirée Blues et Slow Jazz',
+      organizer: 'Barrelhouse Club',
+      location: 'Studio Tango Montréal',
+      address: '7755 Boul. Saint-Laurent #200-A&B, Montreal, QC H2R 1X1',
+    },
+  ];
 
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
@@ -114,11 +152,11 @@ export default function PreviewSection({ title }: Props) {
         <div className="embla__container flex -ml-8">
           {title === SOCIAL_DANCES ? (
             <>
-              <DanceEventPreviewCard event={tempEvent} />
-              <DanceEventPreviewCard event={tempEvent} />
-              <DanceEventPreviewCard event={tempEvent} />
-              <DanceEventPreviewCard event={tempEvent} />
-              <DanceEventPreviewCard event={tempEvent} />
+              <DanceEventPreviewCard event={tempEvents[0]} />
+              <DanceEventPreviewCard event={tempEvents[1]} />
+              <DanceEventPreviewCard event={tempEvents[2]} />
+              <DanceEventPreviewCard event={tempEvents[3]} />
+              <DanceEventPreviewCard event={tempEvents[4]} />
             </>
           ) : (
             <>
