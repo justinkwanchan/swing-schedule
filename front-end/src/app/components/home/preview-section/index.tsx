@@ -149,7 +149,7 @@ export default function PreviewSection({ title }: Props) {
       </div>
 
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container flex -ml-8">
+        <div className="embla__container flex -ml-3 md:-ml-8">
           {title === SOCIAL_DANCES ? (
             <>
               <DanceEventPreviewCard event={tempEvents[0]} />
