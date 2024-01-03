@@ -3,9 +3,10 @@ import splotch from 'public/splotch.svg';
 
 type Props = {
   title: string;
+  description: string;
 };
 
-export default function PageTitleSection({ title }: Props) {
+export default function PageTitleSection({ title, description }: Props) {
   return (
     <section className="flex flex-col md:flex-row h-[calc(80svh-62px)] w-full mb-12">
       <div className="flex relative bg-light-grey h-[70vw] md:h-auto md:w-3/5">
@@ -19,7 +20,11 @@ export default function PageTitleSection({ title }: Props) {
         </h1>
       </div>
 
-      <div className="bg-dark-grey h-[calc(60svh-64px)] md:h-auto grow"></div>
+      <div className="flex bg-dark-grey md:h-auto md:grow">
+        <h2 className="text-white tracking-widest m-auto py-6 px-8 md:p-32">
+          {description}
+        </h2>
+      </div>
     </section>
   );
 }
