@@ -164,6 +164,9 @@ export default function PreviewSection({ title }: Props) {
               <PreviousFlyerCard dates="OCT 1 - OCT 7" />
               <PreviousFlyerCard dates="OCT 24 - OCT 30" />
               <PreviousFlyerCard dates="OCT 31 - NOV 6" />
+              <PreviousFlyerCard dates="OCT 31 - NOV 6" />
+              <PreviousFlyerCard dates="OCT 31 - NOV 6" />
+              <PreviousFlyerCard dates="OCT 31 - NOV 6" />
             </>
           )}
         </div>
