@@ -13,9 +13,9 @@ export default function PageTitleSection({ title, description }: Props) {
         <Image
           src={splotch}
           alt={'Splotchy Frame'}
-          className="m-auto w-[75%] md:w-4/5 h-[90%]"
+          className="absolute -top-5 left-[5%] w-11/12 h-[115%] z-10 md:static md:m-auto md:w-4/5 md:h-[90%]"
         />
-        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[33%] w-4/5 text-6xl text-center font-bold sm:text-7xl md:text-6xl lg:text-8xl xl:text-9xl">
+        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[33%] w-4/5 text-7xl text-center font-bold z-20 sm:text-8xl md:text-7xl lg:text-8xl xl:text-9xl">
           {title}
         </h1>
       </div>
