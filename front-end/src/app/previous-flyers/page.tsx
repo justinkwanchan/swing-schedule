@@ -9,16 +9,19 @@ export default function PreviousFlyers() {
     <div className="flex flex-col items-center mb-12">
       <PageTitleSection title="Previous Flyers" description={pageDescription} />
 
-      <div className="flex flex-wrap -ml-8 gap-y-8 w-4/5">
-        <PreviousFlyerCard dates="OCT 8 - OCT 14" />
-        <PreviousFlyerCard dates="OCT 1 - OCT 7" />
-        <PreviousFlyerCard dates="OCT 24 - OCT 30" />
-        <PreviousFlyerCard dates="OCT 8 - OCT 14" />
-        <PreviousFlyerCard dates="OCT 1 - OCT 7" />
-        <PreviousFlyerCard dates="OCT 24 - OCT 30" />
-        <PreviousFlyerCard dates="OCT 8 - OCT 14" />
-        <PreviousFlyerCard dates="OCT 1 - OCT 7" />
-        <PreviousFlyerCard dates="OCT 24 - OCT 30" />
+      {/* Grid column widths must match the card widths in /previous-flyer-card/index.tsx */}
+      <div
+        className={`grid grid-cols-[repeat(auto-fit,_170px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
+      >
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 8 - OCT 14" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 1 - OCT 7" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 24 - OCT 30" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 8 - OCT 14" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 1 - OCT 7" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 24 - OCT 30" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 8 - OCT 14" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 1 - OCT 7" />
+        <PreviousFlyerCard isCarouseled={false} dates="OCT 24 - OCT 30" />
       </div>
     </div>
   );
