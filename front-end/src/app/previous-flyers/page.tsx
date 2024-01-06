@@ -1,5 +1,5 @@
-import PreviousFlyerCard from '../components/home/previous-flyer-card';
 import PageTitleSection from '../components/page-title-section';
+import PreviousFlyerCard from '../components/home/previous-flyer-card';
 
 export default function PreviousFlyers() {
   const pageDescription =
@@ -12,7 +12,7 @@ export default function PreviousFlyers() {
       {/* Using grid instead of flex because it allows semi-filled row to align left instead of center
        ** Grid column widths must match the card widths in /previous-flyer-card/index.tsx */}
       <div
-        className={`grid grid-cols-[repeat(auto-fit,_170px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
+        className={`grid grid-cols-[repeat(auto-fit,_176px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
       >
         <PreviousFlyerCard isCarouseled={false} dates="OCT 8 - OCT 14" />
         <PreviousFlyerCard isCarouseled={false} dates="OCT 1 - OCT 7" />
