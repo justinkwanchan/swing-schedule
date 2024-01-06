@@ -9,7 +9,8 @@ export default function PreviousFlyers() {
     <div className="flex flex-col items-center mb-12">
       <PageTitleSection title="Previous Flyers" description={pageDescription} />
 
-      {/* Grid column widths must match the card widths in /previous-flyer-card/index.tsx */}
+      {/* Using grid instead of flex because it allows semi-filled row to align left instead of center
+       ** Grid column widths must match the card widths in /previous-flyer-card/index.tsx */}
       <div
         className={`grid grid-cols-[repeat(auto-fit,_170px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
       >
