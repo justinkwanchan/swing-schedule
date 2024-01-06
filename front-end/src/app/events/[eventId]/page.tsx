@@ -80,7 +80,7 @@ export default async function Event({
 
   return (
     <div className="flex flex-col items-center mb-12">
-      <PageTitleSection title={danceName} />
+      <PageTitleSection title={danceName} image="placeholder text" />
 
       <div className="flex flex-col w-11/12 gap-12">
         <div className="flex relative md:static justify-between border-b border-black pb-8">
