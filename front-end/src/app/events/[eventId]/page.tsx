@@ -97,7 +97,7 @@ export default async function Event({
           </div>
           <div className="self-center md:self-auto">
             <Link href={URL} target="_blank">
-              <button className="absolute right-0 -top-20 font-bold bg-[#BDFFF3] w-max mb-4 px-8 py-4 rounded-2xl shadow-[4px_6px_8px_0_rgba(0,0,0,0.25)] md:static">
+              <button className="absolute right-0 -top-20 font-bold bg-[#BDFFF3] w-max mb-4 px-8 py-4 rounded-2xl shadow-[4px_6px_8px_0_rgba(0,0,0,0.25)] z-30 md:static">
                 Visit Website
               </button>
             </Link>
