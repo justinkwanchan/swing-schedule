@@ -2,12 +2,21 @@ import Link from 'next/link';
 import Card from './Card';
 
 type Props = {
+  isCarouseled: boolean;
   event: EventDetails;
 };
 
-export default function DanceEventPreviewCard({ event }: Props) {
+export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
   return (
-    <div className="flex-[0_0_170px] pl-4 md:pl-8 md:flex-[0_0_50%] lg:flex-[0_0_33.333333%] 2xl:flex-[0_0_25%]">
+    /* Card widths must match the grid column widths in /events/page.tsx
+     * Carouseled cards include padding of 16px for small and 32px for large */
+    <div
+      className={`${
+        isCarouseled
+          ? 'flex-[0_0_192px] pl-4 md:flex-[0_0_272px] md:pl-8'
+          : 'w-44 md:w-60'
+      }`}
+    >
       {/* Mobile view */}
       <Link href={`events/${event.id}`} className="md:hidden">
         <Card event={event} />

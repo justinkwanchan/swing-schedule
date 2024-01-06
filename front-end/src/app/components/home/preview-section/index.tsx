@@ -155,7 +155,11 @@ export default function PreviewSection({ title }: Props) {
           {title === SOCIAL_DANCES ? (
             <>
               {tempEvents.map((tempEvent) => (
-                <DanceEventPreviewCard event={tempEvent} key={tempEvent.id} />
+                <DanceEventPreviewCard
+                  isCarouseled={true}
+                  event={tempEvent}
+                  key={tempEvent.id}
+                />
               ))}
             </>
           ) : (

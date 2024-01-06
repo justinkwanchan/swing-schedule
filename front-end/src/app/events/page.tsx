@@ -19,22 +19,26 @@ export default function Events() {
     <div className="flex flex-col items-center mb-12">
       <PageTitleSection title="Upcoming" description={pageDescription} />
 
-      <div className="flex flex-wrap w-4/5 mb-12 gap-y-12 -ml-8">
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
-        <DanceEventPreviewCard event={tempEvent} />
+      {/* Using grid instead of flex because it allows semi-filled row to align left instead of center
+       ** Grid column widths must match the card widths in /dance-event-preview-card/index.tsx */}
+      <div
+        className={`grid grid-cols-[repeat(auto-fit,_176px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
+      >
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
       </div>
     </div>
   );
