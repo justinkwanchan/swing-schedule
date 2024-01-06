@@ -5,9 +5,15 @@ import PageTitleSection from '@/app/components/page-title-section';
 import danceDude from 'public/dance-dude.svg';
 
 export default function Contribute() {
+  const pageDescription =
+    "Want to add your event to the list? Check out how to contribute below and be part of the fun - it's easy to share the swing dance excitement with our community!";
+
   return (
     <div className="flex flex-col items-center mb-12">
-      <PageTitleSection title="How to Contribute" />
+      <PageTitleSection
+        title="How to Contribute"
+        description={pageDescription}
+      />
 
       <div className="w-11/12">
         <div className="flex gap-8 mb-16">
