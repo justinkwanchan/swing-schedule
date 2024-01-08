@@ -38,3 +38,26 @@ export default function PageTitleSection({ title, description, image }: Props) {
     </section>
   );
 }
+
+/* There seems to be a bug with Next.Js whereby importing getSplotchTitleFontSizes from lib applies the TailWind classes to
+ * the element in the DOM, but then the classes are not expressed either in the ruleset or in the window. For some reason
+ * this bug does not occur if the function appears in this file even if commented out. Both in dev and in production build. */
+
+// function getSplotchTitleFontSizes(title: string) {
+//   const fontSize = {
+//     short: 'text-7xl sm:text-8xl lg:text-9xl',
+//     medium: 'text-6xl sm:text-7xl lg:text-8xl',
+//     long: 'leading-none text-[54px] sm:text-[66px] md:text-6xl lg:text-7xl xl:text-8xl',
+//     xLong: 'text-5xl sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl',
+//   };
+
+//   const longestWord = Math.max(...title.split(' ').map((word) => word.length));
+
+//   return title.length > 30
+//     ? fontSize['xLong']
+//     : title.length > 20
+//     ? fontSize['long']
+//     : title.length > 10 || longestWord > 5
+//     ? fontSize['medium']
+//     : fontSize['short'];
+// }
