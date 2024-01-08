@@ -4,9 +4,10 @@ import locationPin from 'public/location-pin.svg';
 
 type Props = {
   event: EventDetails;
+  isDesktop: boolean;
 };
 
-export default function Card({ event }: Props) {
+export default function Card({ event, isDesktop }: Props) {
   const { id, image, datetime, title, organizer, location, address } = event;
 
   return (
@@ -29,12 +30,11 @@ export default function Card({ event }: Props) {
             <p>{location}</p>
           </div>
           <p className="hidden md:block">{address}</p>
-          <Link
-            href={`events/${id}`}
-            className="hidden md:block underline text-cyan-400"
-          >
-            More info
-          </Link>
+          {isDesktop && (
+            <Link href={`events/${id}`} className="underline text-cyan-400">
+              More info
+            </Link>
+          )}
         </div>
       </div>
     </div>

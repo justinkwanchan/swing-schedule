@@ -19,12 +19,12 @@ export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
     >
       {/* Mobile view */}
       <Link href={`events/${event.id}`} className="md:hidden">
-        <Card event={event} />
+        <Card event={event} isDesktop={false} />
       </Link>
 
       {/* Desktop view */}
       <div className="hidden md:block">
-        <Card event={event} />
+        <Card event={event} isDesktop={true} />
       </div>
     </div>
   );
