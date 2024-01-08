@@ -6,11 +6,13 @@ export default function getSplotchTitleFontSizes(title: string) {
     xLong: 'text-5xl sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl',
   };
 
+  const longestWord = Math.max(...title.split(' ').map((word) => word.length));
+
   return title.length > 30
     ? fontSize['xLong']
     : title.length > 20
     ? fontSize['long']
-    : title.length > 10
+    : title.length > 10 || longestWord > 5
     ? fontSize['medium']
     : fontSize['short'];
 }
