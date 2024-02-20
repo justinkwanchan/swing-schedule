@@ -31,6 +31,69 @@ functions:
           cors: true
     environment:
       TableName: ApplicationTable
+  createEvent:
+    handler: functions/events.createEvent
+    events:
+      - http:
+          path: /createEvent
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
+  queryEvent:
+    handler: functions/events.queryEvent
+    events:
+      - http:
+          path: /queryEvent
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
+  queryOccurrencesByEvent:
+    handler: functions/events.queryOccurrencesByEvent
+    events:
+      - http:
+          path: /queryOccurrencesByEvent
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
+  queryEventsByWeekOf:
+    handler: functions/events.queryEventsByWeekOf
+    events:
+      - http:
+          path: /queryEventsByWeekOf
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
+  queryEventsByUser:
+    handler: functions/events.queryEventsByUser
+    events:
+      - http:
+          path: /queryEventsByUser
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
+  updateEvent:
+    handler: functions/events.updateEvent
+    events:
+      - http:
+          path: /updateEvent
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
+  updateOccurrencesByEvent:
+    handler: functions/events.updateOccurrencesByEvent
+    events:
+      - http:
+          path: /updateOccurrencesByEvent
+          method: post
+          cors: true
+    environment:
+      TableName: ApplicationTable
 
 resources:
   Resources:
@@ -48,4 +111,31 @@ resources:
             AttributeType: S
           - AttributeName: sk
             AttributeType: S
-        BillingMode: PAY_PER_REQUEST
+          - AttributeName: user
+            AttributeType: S
+        GlobalSecondaryIndexes:
+          - IndexName: WEEKOF_GSI
+            KeySchema:
+              - AttributeName: sk
+                KeyType: HASH
+              - AttributeName: pk
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 1
+          - IndexName: USER_GSI
+            KeySchema:
+              - AttributeName: user
+                KeyType: HASH
+              - AttributeName: pk
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 1
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 1

@@ -2,6 +2,6 @@
   "dependencies": {
     "aws-sdk": "^2.1509.0",
     "bcryptjs": "^2.4.3",
-    "uuid": "^9.0.1"
+    "dayjs": "^1.11.10"
   }
 }

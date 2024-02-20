@@ -38,7 +38,8 @@ module.exports.signup = async (event) => {
     Item: {
       pk: `USER#${email}`,
       sk: `INFORMATION`,
-      password: hashedPassword
+      password: hashedPassword,
+      user: email
     }
   };
 
