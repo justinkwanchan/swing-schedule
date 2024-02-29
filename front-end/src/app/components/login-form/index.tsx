@@ -4,8 +4,8 @@ import alyssa from 'public/Alyssa.png';
 
 export default function LoginForm({ isRegister }: { isRegister: boolean }) {
   return (
-    <div className="flex h-[calc(100svh-238px)] w-full bg-dark-grey">
-      <div className="flex justify-center gap-8 bg-white w-11/12 h-[95%] rounded-xl m-auto p-6">
+    <div className="flex min-h-[calc(100svh-238px)] w-full bg-dark-grey">
+      <div className="flex justify-center gap-8 bg-white w-11/12 rounded-xl m-auto my-5 p-6">
         <div className="hidden md:flex w-1/2 md:max-w-lg">
           <Image
             src={alyssa}
