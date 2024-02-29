@@ -11,8 +11,17 @@ type Props = {
 export default function PageTitleSection({ title, description, image }: Props) {
   const fontSizes = getSplotchTitleFontSizes(title);
 
+  const flexOrder = {
+    titleFirst: 'flex-col',
+    titleSecond: 'flex-col-reverse',
+  };
+
   return (
-    <section className="flex flex-col-reverse md:flex-row w-full mb-12">
+    <section
+      className={`flex ${
+        description ? flexOrder['titleSecond'] : flexOrder['titleFirst']
+      } md:flex-row w-full mb-12`}
+    >
       <div className="flex relative bg-light-grey h-[70vw] max-h-[40svh] md:h-auto md:max-h-[65svh] md:flex-[0_0_60%] 2xl:flex-[0_0_50%]">
         <Image
           src={splotch}
@@ -34,7 +43,9 @@ export default function PageTitleSection({ title, description, image }: Props) {
         </div>
       )}
 
-      {image && <div className="flex bg-dark-grey md:grow md:h-auto"></div>}
+      {image && (
+        <div className="flex bg-dark-grey h-[60vw] md:grow md:h-auto"></div>
+      )}
     </section>
   );
 }
