@@ -5,8 +5,8 @@ import alyssa from 'public/Alyssa.png';
 export default function LoginForm({ isRegister }: { isRegister: boolean }) {
   return (
     <div className="flex h-[calc(100svh-238px)] w-full bg-dark-grey">
-      <div className="flex gap-8 bg-white w-11/12 h-[95%] rounded-xl m-auto p-6">
-        <div className="hidden md:flex w-1/2">
+      <div className="flex justify-center gap-8 bg-white w-11/12 h-[95%] rounded-xl m-auto p-6">
+        <div className="hidden md:flex w-1/2 md:max-w-lg">
           <Image
             src={alyssa}
             alt={'Alyssa dancing'}
@@ -14,7 +14,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
           />
         </div>
 
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 md:max-w-lg">
           <div className="flex flex-col w-full md:w-5/6 m-auto">
             <h1 className="text-3xl font-medium self-center">
               {isRegister ? 'Create your account' : 'Welcome Back!'}
