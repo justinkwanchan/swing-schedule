@@ -3,6 +3,10 @@ import Link from 'next/link';
 import alyssa from 'public/Alyssa.png';
 
 export default function LoginForm({ isRegister }: { isRegister: boolean }) {
+  const inputLabelClasses = 'text-sm font-medium text-sub-text-grey';
+  const inputFieldClasses =
+    'w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6';
+
   return (
     <div className="flex min-h-[calc(100svh-238px)] w-full bg-dark-grey">
       <div className="flex justify-center gap-8 bg-white w-11/12 rounded-xl m-auto my-5 p-6">
@@ -25,10 +29,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                 {isRegister && (
                   <>
                     <div>
-                      <label
-                        htmlFor="given-name"
-                        className="text-sm font-medium text-sub-text-grey"
-                      >
+                      <label htmlFor="given-name" className={inputLabelClasses}>
                         Given Name
                       </label>
                       <div>
@@ -37,7 +38,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="given-name"
                           type="text"
                           autoComplete="given-name"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
@@ -45,7 +46,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                     <div>
                       <label
                         htmlFor="family-name"
-                        className="text-sm font-medium text-sub-text-grey"
+                        className={inputLabelClasses}
                       >
                         Family Name
                       </label>
@@ -55,14 +56,15 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="family-name"
                           type="text"
                           autoComplete="family-name"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
+
                     {/* <div className="col-span-2">
                     <label
                       htmlFor="name"
-                      className="text-sm font-medium text-sub-text-grey"
+                      className={inputLabelClasses}
                     >
                       Full Name
                     </label>
@@ -72,7 +74,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                         name="name"
                         type="text"
                         autoComplete="name"
-                        className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                        className={inputFieldClasses}
                       />
                     </div>
                   </div> */}
@@ -82,10 +84,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                 {isRegister ? (
                   <>
                     <div className="col-span-2">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-medium text-sub-text-grey"
-                      >
+                      <label htmlFor="email" className={inputLabelClasses}>
                         Email
                       </label>
                       <div>
@@ -94,7 +93,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="email"
                           type="email"
                           autoComplete="email"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
@@ -102,7 +101,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                     <div>
                       <label
                         htmlFor="new-password"
-                        className="text-sm font-medium text-sub-text-grey"
+                        className={inputLabelClasses}
                       >
                         New Password
                       </label>
@@ -112,7 +111,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="new-password"
                           type="password"
                           autoComplete="new-password"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
@@ -120,7 +119,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                     <div>
                       <label
                         htmlFor="confirm-password"
-                        className="text-sm font-medium text-sub-text-grey"
+                        className={inputLabelClasses}
                       >
                         Confirm Password
                       </label>
@@ -130,7 +129,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="confirm-password"
                           type="password"
                           autoComplete="new-password"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
@@ -147,10 +146,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                 ) : (
                   <>
                     <div className="col-span-2">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-medium text-sub-text-grey"
-                      >
+                      <label htmlFor="email" className={inputLabelClasses}>
                         Email
                       </label>
                       <div>
@@ -159,7 +155,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="email"
                           type="email"
                           autoComplete="email"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
@@ -167,7 +163,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                     <div className="col-span-2">
                       <label
                         htmlFor="current-password"
-                        className="text-sm font-medium text-sub-text-grey"
+                        className={inputLabelClasses}
                       >
                         Password
                       </label>
@@ -177,7 +173,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           name="current-password"
                           type="password"
                           autoComplete="current-password"
-                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                          className={inputFieldClasses}
                         />
                       </div>
                     </div>
