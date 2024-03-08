@@ -23,7 +23,43 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
             <form>
               <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-2">
                 {isRegister && (
-                  <div className="col-span-2">
+                  <>
+                    <div>
+                      <label
+                        htmlFor="given-name"
+                        className="text-sm font-medium text-sub-text-grey"
+                      >
+                        Given Name
+                      </label>
+                      <div>
+                        <input
+                          id="given-name"
+                          name="given-name"
+                          type="text"
+                          autoComplete="given-name"
+                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="family-name"
+                        className="text-sm font-medium text-sub-text-grey"
+                      >
+                        Family Name
+                      </label>
+                      <div>
+                        <input
+                          id="family-name"
+                          name="family-name"
+                          type="text"
+                          autoComplete="family-name"
+                          className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                        />
+                      </div>
+                    </div>
+                    {/* <div className="col-span-2">
                     <label
                       htmlFor="name"
                       className="text-sm font-medium text-sub-text-grey"
@@ -39,7 +75,8 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                         className="w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
                       />
                     </div>
-                  </div>
+                  </div> */}
+                  </>
                 )}
 
                 {isRegister ? (
@@ -82,7 +119,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
 
                     <div>
                       <label
-                        htmlFor="new-password"
+                        htmlFor="confirm-password"
                         className="text-sm font-medium text-sub-text-grey"
                       >
                         Confirm Password
