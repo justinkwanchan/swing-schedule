@@ -66,10 +66,10 @@ module.exports.createEvent = async (event) => {
       weekOf = weekOf.add(1, 'week');
       
       while (repeatedUntil.isAfter(startDateTime)) {
-        eventObj.startDateTime = dayjs.toISOString(startDateTime);
-        eventObj.endDateTime = dayjs.toISOString(endDateTime);
-        eventObj.weekOf = dayjs.toISOString(weekOf);
-        eventObj.sk = `WEEKOF#${dayjs.toISOString(weekOf)}`;
+        eventObj.startDateTime = startDateTime.toISOString();
+        eventObj.endDateTime = endDateTime.toISOString();
+        eventObj.weekOf = weekOf.toISOString();
+        eventObj.sk = `WEEKOF#${weekOf.toISOString()}`;
 
         const params = {
           TableName: process.env.TableName,
