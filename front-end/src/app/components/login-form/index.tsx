@@ -1,8 +1,15 @@
+'use client';
+
+import { useFormState, useFormStatus } from 'react-dom';
+import { authenticate } from '@/lib/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import alyssa from 'public/Alyssa.png';
 
 export default function LoginForm({ isRegister }: { isRegister: boolean }) {
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const { pending } = useFormStatus();
+
   const inputLabelClasses = 'text-sm font-medium text-sub-text-grey';
   const inputFieldClasses =
     'w-full rounded-2xl border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6';
@@ -24,7 +31,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
               {isRegister ? 'Create your account' : 'Welcome Back!'}
             </h1>
 
-            <form>
+            <form action={dispatch}>
               <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-2">
                 {isRegister && (
                   <>
@@ -182,14 +189,26 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                       <button
                         type="submit"
                         className="font-medium bg-[#BDFFF3] w-full py-2 rounded-2xl shadow-[4px_6px_8px_0_rgba(0,0,0,0.25)]"
+                        aria-disabled={pending}
                       >
                         Log In
                       </button>
                     </div>
+                    <div
+                      className="flex h-8 items-end space-x-1"
+                      aria-live="polite"
+                      aria-atomic="true"
+                    >
+                      {errorMessage && (
+                        <>
+                          <p className="text-sm text-red-500">{errorMessage}</p>
+                        </>
+                      )}
+                    </div>
                   </>
                 )}
 
-                <div className="col-span-2 flex gap-3 mt-4 items-center">
+                {/* <div className="col-span-2 flex gap-3 mt-4 items-center">
                   <div className="flex h-6 items-center">
                     <input
                       id="remember"
@@ -204,11 +223,11 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                   >
                     Remember me for 30 days
                   </label>
-                </div>
+                </div> */}
               </div>
             </form>
 
-            <div className="relative flex w-full h-8 mt-4">
+            {/* <div className="relative flex w-full h-8 mt-4">
               <div className="w-full h-[1px] bg-gradient-to-r from-white via-light-grey to-white m-auto"></div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-1.5 bg-white border rounded-full text-xs text-sub-text-grey">
                 OR
@@ -217,7 +236,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
 
             <button className="w-full py-3 border rounded-2xl mt-6 text-sm text-sub-text-grey">
               Continue with Google
-            </button>
+            </button> */}
 
             <div className="flex gap-1 self-center text-xs mt-12">
               <p className="text-sub-text-grey">
