@@ -5,6 +5,8 @@ import instagramIcon from 'public/instagram-icon.svg';
 import MontrealIcon from '../../svg/MontrealIcon';
 
 import { usePathname } from 'next/navigation';
+import { getSession, logOut } from '@/lib/actions';
+import { useEffect, useState } from 'react';
 
 export default function Navbar({
   isOpen,
@@ -14,6 +16,14 @@ export default function Navbar({
   toggleOpen: () => void;
 }) {
   const pathName = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const session = await getSession();
+      setIsLoggedIn(!!session);
+    })();
+  }, []);
 
   return (
     <nav className="bg-white mx-auto p-4 flex justify-between items-center sticky top-0 z-40">
@@ -50,14 +60,20 @@ export default function Navbar({
           alt={'Instagram Icon'}
           className="hidden md:block"
         />
-        <Link
-          href="/login"
-          className={
-            ['/login', '/register'].includes(pathName) ? 'font-medium' : ''
-          }
-        >
-          LOGIN
-        </Link>
+        {!isLoggedIn ? (
+          <Link
+            href="/login"
+            className={
+              ['/login', '/register'].includes(pathName) ? 'font-medium' : ''
+            }
+          >
+            LOGIN
+          </Link>
+        ) : (
+          <form action={logOut}>
+            <button type="submit">LOGOUT</button>
+          </form>
+        )}
       </div>
     </nav>
   );

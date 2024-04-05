@@ -18,7 +18,6 @@ export const { auth, signIn, signOut } = NextAuth({
         if (parsedCredentials.success) {
           const { email, 'current-password': password } =
             parsedCredentials.data;
-          const queryUser = { email, password };
           const user = await fetch(
             'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/login',
             {
@@ -26,11 +25,11 @@ export const { auth, signIn, signOut } = NextAuth({
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify(queryUser),
+              body: JSON.stringify({ email, password }),
             }
           );
           if (!user) return null;
-          if (user.status === 200) return queryUser;
+          if (user.status === 200) return { email };
         }
 
         return null;
