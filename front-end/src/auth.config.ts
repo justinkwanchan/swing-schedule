@@ -8,14 +8,16 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnCreateEvent = nextUrl.pathname.startsWith('/create-event');
+      const isOnLoginOrRegister = ['/login', '/register'].includes(
+        nextUrl.pathname
+      );
       if (isOnCreateEvent) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        // return Response.redirect(new URL('/create-event', nextUrl));
+        return isLoggedIn; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn && isOnLoginOrRegister) {
+        return Response.redirect(new URL('/create-event', nextUrl));
       }
       return true;
     },
   },
-  providers: [], // Add providers with an empty array for now
+  providers: [],
 } satisfies NextAuthConfig;
