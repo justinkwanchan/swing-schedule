@@ -45,12 +45,21 @@ export default function Navbar({
         >
           UPCOMING EVENTS
         </Link>
-        <Link
-          href="/contribute"
-          className={pathName === '/contribute' ? 'font-medium' : ''}
-        >
-          HOW TO CONTRIBUTE
-        </Link>
+        {!isLoggedIn ? (
+          <Link
+            href="/contribute"
+            className={pathName === '/contribute' ? 'font-medium' : ''}
+          >
+            HOW TO CONTRIBUTE
+          </Link>
+        ) : (
+          <Link
+            href="/create-event"
+            className={pathName === '/create-event' ? 'font-medium' : ''}
+          >
+            CREATE EVENT
+          </Link>
+        )}
       </div>
 
       {/* Right Side */}
