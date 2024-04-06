@@ -1,13 +1,20 @@
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
-import { authenticate } from '@/lib/actions';
+import { authenticate, registerAndAuthenticate } from '@/lib/actions';
 import Image from 'next/image';
 import Link from 'next/link';
 import alyssa from 'public/Alyssa.png';
 
 export default function LoginForm({ isRegister }: { isRegister: boolean }) {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const [loginErrorMessage, dispatchLogin] = useFormState(
+    authenticate,
+    undefined
+  );
+  const [registerErrorMessage, dispatchRegister] = useFormState(
+    registerAndAuthenticate,
+    undefined
+  );
   const { pending } = useFormStatus();
 
   const inputLabelClasses = 'text-sm font-medium text-sub-text-grey';
@@ -31,11 +38,11 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
               {isRegister ? 'Create your account' : 'Welcome Back!'}
             </h1>
 
-            <form action={dispatch}>
+            <form action={isRegister ? dispatchRegister : dispatchLogin}>
               <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-2">
                 {isRegister && (
                   <>
-                    <div>
+                    {/* <div>
                       <label htmlFor="given-name" className={inputLabelClasses}>
                         Given Name
                       </label>
@@ -66,7 +73,7 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                           className={inputFieldClasses}
                         />
                       </div>
-                    </div>
+                    </div> */}
 
                     {/* <div className="col-span-2">
                     <label
@@ -199,9 +206,11 @@ export default function LoginForm({ isRegister }: { isRegister: boolean }) {
                       aria-live="polite"
                       aria-atomic="true"
                     >
-                      {errorMessage && (
+                      {(loginErrorMessage || registerErrorMessage) && (
                         <>
-                          <p className="text-sm text-red-500">{errorMessage}</p>
+                          <p className="text-sm text-red-500">
+                            {loginErrorMessage || registerErrorMessage}
+                          </p>
                         </>
                       )}
                     </div>
