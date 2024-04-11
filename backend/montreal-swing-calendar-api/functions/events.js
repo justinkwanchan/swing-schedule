@@ -188,15 +188,15 @@ module.exports.queryEventsByWeekOf = async (event) => {
 }
 
 module.exports.queryEventsByUser = async (event) => {
-  const { user } = JSON.parse(event.body);
+  const { email } = JSON.parse(event.body);
 
   const params = {
     TableName: process.env.TableName,
-    KeyConditionExpression: 'user = :user ',
+    KeyConditionExpression: 'email = :email ',
     ExpressionAttributeValues: {
-        ':user': `user`,
+        ':email': email,
     },
-    IndexName: 'USER_GSI'
+    IndexName: 'EMAIL_GSI'
   };
   
   const res = await docClient.query(params).promise();
