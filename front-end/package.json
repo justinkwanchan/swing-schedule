@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.0",
+    "antd": "^5.16.1",
     "dayjs": "^1.11.10",
     "embla-carousel-react": "^8.0.0-rc14",
     "leaflet": "^1.9.4",
