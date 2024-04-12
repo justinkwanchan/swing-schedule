@@ -19,7 +19,7 @@ const retrieveEventDetails = (event) => {
         details,
         location,
         price,
-        user
+        email
     } = JSON.parse(event.body);
 
     return {
@@ -35,15 +35,16 @@ const retrieveEventDetails = (event) => {
         details: details,
         location: location,
         price: price,
-        user: user
+        email: email
     };
 }
 
 module.exports.createEvent = async (event) => {
 
     const eventObj = retrieveEventDetails(event);
+    console.log(JSON.stringify(eventObj));
 
-    const params = {
+    let params = {
         TableName: process.env.TableName,
         Item: eventObj
     };
@@ -71,10 +72,7 @@ module.exports.createEvent = async (event) => {
         eventObj.weekOf = weekOf.toISOString();
         eventObj.sk = `WEEKOF#${weekOf.toISOString()}`;
 
-        const params = {
-          TableName: process.env.TableName,
-          Item: eventObj
-        };
+        params.Item = eventObj;
     
         await docClient.put(params).promise();
 
