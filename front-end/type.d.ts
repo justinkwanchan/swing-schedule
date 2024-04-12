@@ -7,3 +7,14 @@ type EventDetails = {
   location: string;
   address: string;
 };
+
+type CreateEventFormData = {
+  eventName: string;
+  startDateTime: string;
+  endDateTime: string;
+  repeated: boolean;
+  repeatedUntil: string;
+  location: string;
+  price: string;
+  details: string;
+};
