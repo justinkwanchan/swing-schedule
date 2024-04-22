@@ -1,6 +1,6 @@
 'use client';
 
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { createEvent } from '@/lib/actions';
 import {
   ConfigProvider,
@@ -11,21 +11,33 @@ import {
   Col,
   Row,
 } from 'antd';
-import type { DatePickerProps } from 'antd';
+import type { TimeRangePickerProps } from 'antd';
 import { useState } from 'react';
+
+const { RangePicker } = DatePicker;
 
 export default function CreateEventForm() {
   const [isRepeated, setIsRepeated] = useState(false);
 
+  /* Convert the date and range picker props to formatted Dayjs times */
   const datePickerValueProps = {
-    getValueFromEvent: (inputDate: any) => inputDate?.format(),
-    getValueProps: (inputDate: string) => ({
+    getValueFromEvent: (inputDate: Dayjs | null) => inputDate?.format(),
+    getValueProps: (inputDate: string | undefined) => ({
       value: inputDate ? dayjs(inputDate) : '',
     }),
   };
 
-  const datePickerFormatting: DatePickerProps = {
-    showTime: { format: 'h:mma' },
+  const rangePickerValueProps = {
+    getValueFromEvent: (inputDate: Dayjs[] | null) =>
+      inputDate?.map((date: Dayjs) => date?.format()),
+    getValueProps: (inputDate: string[] | undefined) => ({
+      value: inputDate
+        ? inputDate.map((input) => (input ? dayjs(input) : ''))
+        : '',
+    }),
+  };
+
+  const datePickerFormatting: TimeRangePickerProps = {
     format: 'YYYY-MM-DD @ h:mma',
     minuteStep: 5,
     style: { width: '100%' },
@@ -57,28 +69,14 @@ export default function CreateEventForm() {
           >
             <Input />
           </Form.Item>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                label="Start Date/Time"
-                name="startDateTime"
-                rules={[{ required: true }]}
-                {...datePickerValueProps}
-              >
-                <DatePicker {...datePickerFormatting} />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                label="End Date/Time"
-                name="endDateTime"
-                rules={[{ required: true }]}
-                {...datePickerValueProps}
-              >
-                <DatePicker {...datePickerFormatting} />
-              </Form.Item>
-            </Col>
-          </Row>
+          <Form.Item
+            label="Date and Time"
+            name="dateTime"
+            rules={[{ required: true }]}
+            {...rangePickerValueProps}
+          >
+            <RangePicker showTime {...datePickerFormatting} />
+          </Form.Item>
           <Row gutter={16}>
             <Col span={6}>
               <Form.Item

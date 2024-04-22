@@ -54,19 +54,22 @@ export async function logOut() {
 }
 
 export async function createEvent(formData: CreateEventFormData) {
-  const { startDateTime, repeated, repeatedUntil } = formData;
+  const { dateTime, ...restOfData } = formData;
+  const [startDateTime, endDateTime] = dateTime;
   const id = crypto.randomUUID();
   const cancelled = false;
   const weekOf = dayjs(startDateTime).startOf('isoWeek').format();
-  const adjustedRepeatedUntil = repeated
-    ? dayjs(repeatedUntil).endOf('day').format()
+  const adjustedRepeatedUntil = restOfData.repeated
+    ? dayjs(restOfData.repeatedUntil).endOf('day').format()
     : '';
   const session = await auth();
   const email = session?.user?.email;
 
   const createEventData = {
-    ...formData,
+    ...restOfData,
     id,
+    startDateTime,
+    endDateTime,
     cancelled,
     repeatedUntil: adjustedRepeatedUntil,
     weekOf,
@@ -86,7 +89,6 @@ export async function createEvent(formData: CreateEventFormData) {
   const responseParsed = await response.json();
   console.log(responseParsed);
   revalidatePath('/create-event');
-  // redirect('/');
 }
 
 export async function getEventsByUser(): Promise<EventFromDB[]> {

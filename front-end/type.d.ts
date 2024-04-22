@@ -10,8 +10,7 @@ type EventDetails = {
 
 type CreateEventFormData = {
   eventName: string;
-  startDateTime: string;
-  endDateTime: string;
+  dateTime: string[];
   repeated: boolean;
   repeatedUntil: string;
   location: string;
