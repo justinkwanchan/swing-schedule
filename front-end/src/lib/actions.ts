@@ -51,22 +51,23 @@ export async function getSession() {
 export async function logOut() {
   await signOut();
 }
+
 export async function createEvent(formData: CreateEventFormData) {
-  const { startDateTime, repeated } = formData;
+  const { startDateTime, repeated, repeatedUntil } = formData;
   const id = crypto.randomUUID();
   const cancelled = false;
   const weekOf = dayjs(startDateTime).startOf('isoWeek').format();
+  const adjustedRepeatedUntil = repeated
+    ? dayjs(repeatedUntil).endOf('day').format()
+    : '';
   const session = await auth();
   const email = session?.user?.email;
-
-  if (!repeated) {
-    formData.repeatedUntil = '';
-  }
 
   const createEventData = {
     ...formData,
     id,
     cancelled,
+    repeatedUntil: adjustedRepeatedUntil,
     weekOf,
     email,
   };
