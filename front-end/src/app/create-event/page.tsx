@@ -1,7 +1,7 @@
 'use client';
 
 import dayjs from 'dayjs';
-import { createEvent, generateUUID } from '@/lib/actions';
+import { createEvent, getEventsByUser } from '@/lib/actions';
 import {
   ConfigProvider,
   Form,
@@ -12,10 +12,13 @@ import {
   Row,
 } from 'antd';
 import type { DatePickerProps } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import UserEventCard from '../components/user-event-card';
 
 export default function CreateEvent() {
   const [isRepeated, setIsRepeated] = useState(false);
+  const [events, setEvents] = useState<EventFromDB[]>([]);
+
   const datePickerValueProps = {
     getValueFromEvent: (inputDate: any) => inputDate?.format(),
     getValueProps: (inputDate: string) => ({
@@ -30,6 +33,13 @@ export default function CreateEvent() {
     style: { width: '100%' },
   };
 
+  useEffect(() => {
+    (async () => {
+      const userEvents = await getEventsByUser();
+      setEvents(userEvents);
+    })();
+  }, []);
+
   return (
     <main className="flex justify-center">
       <aside className="flex flex-col gap-4 bg-[#CDCFD0] p-8">
@@ -38,7 +48,11 @@ export default function CreateEvent() {
           Below are your upcoming active events. Manage your events below or
           create a new listing.
         </p>
-        <div>Created Events Placeholder</div>
+        <section className="flex flex-col items-center gap-4 w-full">
+          {events.map((event) => (
+            <UserEventCard key={event.pk + event.sk} event={event} />
+          ))}
+        </section>
       </aside>
       <section className="flex grow flex-col max-w-[1034px] gap-4 bg-[#484949]">
         <h1 className="text-2xl font-medium text-center text-white">
