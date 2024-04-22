@@ -5,6 +5,7 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
 import { auth, signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -85,4 +86,27 @@ export async function createEvent(formData: CreateEventFormData) {
   const responseParsed = await response.json();
   console.log(responseParsed);
   revalidatePath('/create-event');
+  // redirect('/');
+}
+
+export async function getEventsByUser(): Promise<EventFromDB[]> {
+  const session = await auth();
+  const email = session?.user?.email;
+
+  const response = await fetch(
+    'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/queryEventsByUser',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    }
+  );
+
+  const { events }: { events: EventFromDB[] } = await response.json();
+
+  return events.filter(
+    (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
+  );
 }
