@@ -11,6 +11,7 @@ import {
   Col,
   Row,
 } from 'antd';
+import type { DatePickerProps } from 'antd';
 import { useState } from 'react';
 
 export default function CreateEvent() {
@@ -20,6 +21,13 @@ export default function CreateEvent() {
     getValueProps: (inputDate: string) => ({
       value: inputDate ? dayjs(inputDate) : '',
     }),
+  };
+
+  const datePickerFormatting: DatePickerProps = {
+    showTime: { format: 'h:mma' },
+    format: 'YYYY-MM-DD @ h:mma',
+    minuteStep: 5,
+    style: { width: '100%' },
   };
 
   return (
@@ -70,7 +78,7 @@ export default function CreateEvent() {
                     rules={[{ required: true }]}
                     {...datePickerValueProps}
                   >
-                    <DatePicker style={{ width: '100%' }} />
+                    <DatePicker {...datePickerFormatting} />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -80,7 +88,7 @@ export default function CreateEvent() {
                     rules={[{ required: true }]}
                     {...datePickerValueProps}
                   >
-                    <DatePicker style={{ width: '100%' }} />
+                    <DatePicker {...datePickerFormatting} />
                   </Form.Item>
                 </Col>
               </Row>
