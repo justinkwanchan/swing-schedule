@@ -214,11 +214,33 @@ module.exports.queryEventsByUser = async (event) => {
 module.exports.updateEvent = async (event) => {
 
   const eventObj = retrieveEventDetails(event);
+  Object.keys(eventObj).forEach(key => eventObj[key] === undefined && delete eventObj[key])
 
   const params = {
-      TableName: process.env.TableName,
-      Item: eventObj
-  };
+    TableName: process.env.TableName,
+    Key: {
+      pk: eventObj.pk,
+      sk: eventObj.sk
+    },
+    ExpressionAttributeValues: {},
+    ExpressionAttributeNames: {},
+    UpdateExpression: "",
+    ReturnValues: "UPDATED_NEW"
+  }
+
+  const keyIds = ["pk", "sk"];
+  let prefix = "set ";
+  let attributes = Object.keys(eventObj);
+  for (const attribute of attributes) {
+    if (!keyIds.includes(attribute)) {
+        params["UpdateExpression"] += prefix + "#" + attribute + " = :" + attribute;
+        params["ExpressionAttributeValues"][":" + attribute] = eventObj[attribute];
+        params["ExpressionAttributeNames"]["#" + attribute] = attribute;
+        prefix = ", ";
+    }
+  }
+
+  console.log("Params: ", params)
 
   await docClient.update(params).promise();
 
