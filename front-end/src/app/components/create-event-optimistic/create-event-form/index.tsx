@@ -1,6 +1,5 @@
 'use client';
 
-import { v4 as uuidv4 } from 'uuid';
 import dayjs, { Dayjs } from 'dayjs';
 import { createEvent } from '@/lib/actions';
 import {
@@ -50,7 +49,7 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
   };
 
   function submitEvent(formData: CreateEventFormData) {
-    const id = uuidv4();
+    const id = crypto.randomUUID();
     const weekOf = dayjs(formData.dateTime[0]).startOf('isoWeek').format();
     const eventData = { ...formData, id, weekOf };
     const pk = `EVENT#${id}`;
