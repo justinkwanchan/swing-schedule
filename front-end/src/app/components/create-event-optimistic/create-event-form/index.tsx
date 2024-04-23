@@ -11,11 +11,12 @@ import {
   Col,
   Row,
 } from 'antd';
-import type { TimeRangePickerProps } from 'antd';
+import type { TimeRangePickerProps, GetProps } from 'antd';
 import { useState, useTransition } from 'react';
 
 const { RangePicker } = DatePicker;
 
+type RangePickerProps = GetProps<typeof RangePicker>;
 type Props = {
   setOptimisticEvent: (action: { type: string; newEvent: EventCard }) => void;
 };
@@ -42,11 +43,14 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
     }),
   };
 
-  const datePickerFormatting: TimeRangePickerProps = {
+  const rangePickerFormatting: TimeRangePickerProps = {
     format: 'YYYY-MM-DD @ h:mma',
     minuteStep: 5,
     style: { width: '100%' },
   };
+
+  const disabledDate: RangePickerProps['disabledDate'] = (current) =>
+    current && current < dayjs().startOf('day');
 
   function submitEvent(formData: CreateEventFormData) {
     const id = crypto.randomUUID();
@@ -99,7 +103,11 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
             rules={[{ required: true }]}
             {...rangePickerValueProps}
           >
-            <RangePicker showTime {...datePickerFormatting} />
+            <RangePicker
+              showTime
+              {...rangePickerFormatting}
+              disabledDate={disabledDate}
+            />
           </Form.Item>
           <Row gutter={16}>
             <Col span={6}>
@@ -120,7 +128,10 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
                 hidden={!isRepeated}
                 {...datePickerValueProps}
               >
-                <DatePicker style={{ width: '100%' }} />
+                <DatePicker
+                  style={{ width: '100%' }}
+                  disabledDate={disabledDate}
+                />
               </Form.Item>
             </Col>
           </Row>
