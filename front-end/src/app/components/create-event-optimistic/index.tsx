@@ -25,7 +25,9 @@ export default function CreateEventOptimistic({ events }: Props) {
     (state: EventCard[], action: { type: string; newEvent: EventCard }) => {
       switch (action.type) {
         case 'ADD':
-          return [...state, action.newEvent];
+          return [...state, action.newEvent].sort((a, b) =>
+            dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
+          );
         case 'DELETE':
           return state.filter((event) => event.pk !== action.newEvent.pk);
         default:

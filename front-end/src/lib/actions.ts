@@ -104,9 +104,13 @@ export async function getEventsByUser(): Promise<EventFromDB[]> {
 
   const { events }: { events: EventFromDB[] } = await response.json();
 
-  return events.filter(
-    (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
-  );
+  return events
+    .filter(
+      (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
+    )
+    .sort((a, b) =>
+      dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
+    );
 }
 
 export async function cancelEvent(id: string, weekOf: string) {
