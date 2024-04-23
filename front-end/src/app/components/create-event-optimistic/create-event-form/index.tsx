@@ -1,6 +1,7 @@
 'use client';
 
 import dayjs, { Dayjs } from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
 import { createEvent } from '@/lib/actions';
 import {
   ConfigProvider,
@@ -13,6 +14,7 @@ import {
 } from 'antd';
 import type { TimeRangePickerProps, GetProps } from 'antd';
 import { useState, useTransition } from 'react';
+dayjs.extend(isoWeek);
 
 const { RangePicker } = DatePicker;
 
@@ -54,7 +56,10 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
 
   function submitEvent(formData: CreateEventFormData) {
     const id = crypto.randomUUID();
-    const weekOf = dayjs(formData.dateTime[0]).startOf('isoWeek').format();
+    const weekOf = dayjs(formData.dateTime[0])
+      .isoWeekday(1)
+      .startOf('day')
+      .format();
     const eventData = { ...formData, id, weekOf };
     const pk = `EVENT#${id}`;
     const eventCardData = {

@@ -1,8 +1,6 @@
 'use server';
 
 import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-dayjs.extend(isoWeek);
 import { auth, signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { revalidatePath } from 'next/cache';
@@ -84,6 +82,31 @@ export async function createEvent(formData: CreateEventFormData) {
   );
   const responseParsed = await response.json();
   console.log(responseParsed);
+  revalidatePath('/');
+  revalidatePath('/create-event');
+}
+
+export async function cancelEvent(id: string, weekOf: string) {
+  /* Slice removes 'EVENT#' from the partition key to get id */
+  const deleteObj = {
+    id: id.slice(6),
+    weekOf,
+    cancelled: true,
+  };
+
+  const response = await fetch(
+    'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/updateEvent',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(deleteObj),
+    }
+  );
+  const responseParsed = await response.json();
+  console.log(responseParsed);
+  revalidatePath('/');
   revalidatePath('/create-event');
 }
 
@@ -113,25 +136,27 @@ export async function getEventsByUser(): Promise<EventFromDB[]> {
     );
 }
 
-export async function cancelEvent(id: string, weekOf: string) {
-  /* Slice removes 'EVENT#' from the partition key to get id */
-  const deleteObj = {
-    id: id.slice(6),
-    weekOf,
-    cancelled: true,
-  };
-
+export async function getEventsByWeekOf(
+  weekOf: string
+): Promise<EventFromDB[]> {
   const response = await fetch(
-    'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/updateEvent',
+    'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/queryEventsByWeekOf',
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(deleteObj),
+      body: JSON.stringify({ weekOf }),
     }
   );
-  const responseParsed = await response.json();
-  console.log(responseParsed);
-  revalidatePath('/create-event');
+
+  const { events }: { events: EventFromDB[] } = await response.json();
+
+  return events
+    .filter(
+      (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
+    )
+    .sort((a, b) =>
+      dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
+    );
 }
