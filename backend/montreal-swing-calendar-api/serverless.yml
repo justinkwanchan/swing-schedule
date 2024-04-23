@@ -11,6 +11,7 @@ provider:
         - 'dynamodb:*'
       Resource:
         - 'arn:aws:dynamodb:us-east-1:934939427723:table/ApplicationTable'
+        - 'arn:aws:dynamodb:us-east-1:934939427723:table/ApplicationTable/*'
 
 functions:
   signup:
@@ -111,7 +112,7 @@ resources:
             AttributeType: S
           - AttributeName: sk
             AttributeType: S
-          - AttributeName: user
+          - AttributeName: email
             AttributeType: S
         GlobalSecondaryIndexes:
           - IndexName: WEEKOF_GSI
@@ -125,9 +126,9 @@ resources:
             ProvisionedThroughput:
               ReadCapacityUnits: 5
               WriteCapacityUnits: 1
-          - IndexName: USER_GSI
+          - IndexName: EMAIL_GSI
             KeySchema:
-              - AttributeName: user
+              - AttributeName: email
                 KeyType: HASH
               - AttributeName: pk
                 KeyType: RANGE

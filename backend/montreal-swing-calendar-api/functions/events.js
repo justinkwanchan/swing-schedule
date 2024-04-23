@@ -19,7 +19,7 @@ const retrieveEventDetails = (event) => {
         details,
         location,
         price,
-        user
+        email
     } = JSON.parse(event.body);
 
     return {
@@ -35,15 +35,16 @@ const retrieveEventDetails = (event) => {
         details: details,
         location: location,
         price: price,
-        user: user
+        email: email
     };
 }
 
 module.exports.createEvent = async (event) => {
 
     const eventObj = retrieveEventDetails(event);
+    console.log(JSON.stringify(eventObj));
 
-    const params = {
+    let params = {
         TableName: process.env.TableName,
         Item: eventObj
     };
@@ -66,15 +67,12 @@ module.exports.createEvent = async (event) => {
       weekOf = weekOf.add(1, 'week');
       
       while (repeatedUntil.isAfter(startDateTime)) {
-        eventObj.startDateTime = dayjs.toISOString(startDateTime);
-        eventObj.endDateTime = dayjs.toISOString(endDateTime);
-        eventObj.weekOf = dayjs.toISOString(weekOf);
-        eventObj.sk = `WEEKOF#${dayjs.toISOString(weekOf)}`;
+        eventObj.startDateTime = startDateTime.toISOString();
+        eventObj.endDateTime = endDateTime.toISOString();
+        eventObj.weekOf = weekOf.toISOString();
+        eventObj.sk = `WEEKOF#${weekOf.toISOString()}`;
 
-        const params = {
-          TableName: process.env.TableName,
-          Item: eventObj
-        };
+        params.Item = eventObj;
     
         await docClient.put(params).promise();
 
@@ -188,15 +186,15 @@ module.exports.queryEventsByWeekOf = async (event) => {
 }
 
 module.exports.queryEventsByUser = async (event) => {
-  const { user } = JSON.parse(event.body);
+  const { email } = JSON.parse(event.body);
 
   const params = {
     TableName: process.env.TableName,
-    KeyConditionExpression: 'user = :user ',
+    KeyConditionExpression: 'email = :email ',
     ExpressionAttributeValues: {
-        ':user': `user`,
+        ':email': email,
     },
-    IndexName: 'USER_GSI'
+    IndexName: 'EMAIL_GSI'
   };
   
   const res = await docClient.query(params).promise();
@@ -216,11 +214,33 @@ module.exports.queryEventsByUser = async (event) => {
 module.exports.updateEvent = async (event) => {
 
   const eventObj = retrieveEventDetails(event);
+  Object.keys(eventObj).forEach(key => eventObj[key] === undefined && delete eventObj[key])
 
   const params = {
-      TableName: process.env.TableName,
-      Item: eventObj
-  };
+    TableName: process.env.TableName,
+    Key: {
+      pk: eventObj.pk,
+      sk: eventObj.sk
+    },
+    ExpressionAttributeValues: {},
+    ExpressionAttributeNames: {},
+    UpdateExpression: "",
+    ReturnValues: "UPDATED_NEW"
+  }
+
+  const keyIds = ["pk", "sk"];
+  let prefix = "set ";
+  let attributes = Object.keys(eventObj);
+  for (const attribute of attributes) {
+    if (!keyIds.includes(attribute)) {
+        params["UpdateExpression"] += prefix + "#" + attribute + " = :" + attribute;
+        params["ExpressionAttributeValues"][":" + attribute] = eventObj[attribute];
+        params["ExpressionAttributeNames"]["#" + attribute] = attribute;
+        prefix = ", ";
+    }
+  }
+
+  console.log("Params: ", params)
 
   await docClient.update(params).promise();
 
