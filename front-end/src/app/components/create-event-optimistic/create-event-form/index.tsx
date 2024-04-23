@@ -1,5 +1,6 @@
 'use client';
 
+import { v4 as uuidv4 } from 'uuid';
 import dayjs, { Dayjs } from 'dayjs';
 import { createEvent } from '@/lib/actions';
 import {
@@ -12,12 +13,17 @@ import {
   Row,
 } from 'antd';
 import type { TimeRangePickerProps } from 'antd';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 
 const { RangePicker } = DatePicker;
 
-export default function CreateEventForm() {
+type Props = {
+  setOptimisticEvent: (action: { type: string; newEvent: EventCard }) => void;
+};
+
+export default function CreateEventForm({ setOptimisticEvent }: Props) {
   const [isRepeated, setIsRepeated] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   /* Convert the date and range picker props to formatted Dayjs times */
   const datePickerValueProps = {
@@ -43,6 +49,25 @@ export default function CreateEventForm() {
     style: { width: '100%' },
   };
 
+  function submitEvent(formData: CreateEventFormData) {
+    const id = uuidv4();
+    const weekOf = dayjs(formData.dateTime[0]).startOf('isoWeek').format();
+    const eventData = { ...formData, id, weekOf };
+    const pk = `EVENT#${id}`;
+    const eventCardData = {
+      pk,
+      weekOf,
+      eventName: eventData.eventName,
+      startDateTime: eventData.dateTime[0],
+    };
+
+    /* startTransition fixes browser warning */
+    startTransition(() => {
+      setOptimisticEvent({ type: 'ADD', newEvent: eventCardData });
+    });
+    createEvent(eventData);
+  }
+
   return (
     <ConfigProvider
       theme={{
@@ -55,7 +80,7 @@ export default function CreateEventForm() {
     >
       <div className="w-full flex justify-center">
         <Form
-          onFinish={createEvent}
+          onFinish={submitEvent}
           initialValues={{
             repeated: false,
           }}

@@ -9,27 +9,36 @@ type EventDetails = {
 };
 
 type CreateEventFormData = {
+  id: string;
   eventName: string;
   dateTime: string[];
   repeated: boolean;
   repeatedUntil: string;
+  weekOf: string;
   location: string;
   price: string;
   details: string;
 };
 
 type EventFromDB = {
-  repeated: boolean;
-  eventName: string;
-  cancelled: boolean;
-  location: string;
-  repeatedUntil: string;
-  email: string;
-  startDateTime: Date;
-  sk: string;
-  weekOf: Date;
-  details: string;
-  price: string;
   pk: string;
+  sk: string;
+  eventName: string;
+  startDateTime: Date;
   endDateTime: Date;
+  cancelled: boolean;
+  repeated: boolean;
+  repeatedUntil: string;
+  weekOf: Date;
+  location: string;
+  price: string;
+  details: string;
+  email: string;
+};
+
+type EventCard = {
+  pk: string;
+  weekOf: string;
+  eventName: string;
+  startDateTime: string;
 };

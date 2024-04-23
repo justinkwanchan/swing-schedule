@@ -56,9 +56,7 @@ export async function logOut() {
 export async function createEvent(formData: CreateEventFormData) {
   const { dateTime, ...restOfData } = formData;
   const [startDateTime, endDateTime] = dateTime;
-  const id = crypto.randomUUID();
   const cancelled = false;
-  const weekOf = dayjs(startDateTime).startOf('isoWeek').format();
   const adjustedRepeatedUntil = restOfData.repeated
     ? dayjs(restOfData.repeatedUntil).endOf('day').format()
     : '';
@@ -67,12 +65,10 @@ export async function createEvent(formData: CreateEventFormData) {
 
   const createEventData = {
     ...restOfData,
-    id,
     startDateTime,
     endDateTime,
     cancelled,
     repeatedUntil: adjustedRepeatedUntil,
-    weekOf,
     email,
   };
 
@@ -111,4 +107,27 @@ export async function getEventsByUser(): Promise<EventFromDB[]> {
   return events.filter(
     (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
   );
+}
+
+export async function cancelEvent(id: string, weekOf: string) {
+  /* Slice removes 'EVENT#' from the partition key to get id */
+  const deleteObj = {
+    id: id.slice(6),
+    weekOf,
+    cancelled: true,
+  };
+
+  const response = await fetch(
+    'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/updateEvent',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(deleteObj),
+    }
+  );
+  const responseParsed = await response.json();
+  console.log(responseParsed);
+  revalidatePath('/create-event');
 }
