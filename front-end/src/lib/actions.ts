@@ -56,7 +56,7 @@ export async function createEvent(formData: CreateEventFormData) {
   const [startDateTime, endDateTime] = dateTime;
   const cancelled = false;
   const adjustedRepeatedUntil = restOfData.repeated
-    ? dayjs(restOfData.repeatedUntil).endOf('day').format()
+    ? dayjs(restOfData.repeatedUntil).endOf('day').toISOString()
     : '';
   const session = await auth();
   const email = session?.user?.email;

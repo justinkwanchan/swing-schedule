@@ -9,7 +9,7 @@ export default async function Events() {
   const pageDescription =
     'Your go-to guide for swing dance socials in Montreal! Explore upcoming events and connect with the local swing dance community.';
 
-  const weekOf = dayjs().isoWeekday(1).startOf('day').format();
+  const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
   const events = await getEventsByWeekOf(weekOf);
 
   // const tempEvent = {

@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default async function Flyer({ events }: Props) {
-  const weekOf = dayjs().isoWeekday(1).startOf('day').format();
+  const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
   const weekTitle = `${dayjs(weekOf).format('MMMM D')} - ${dayjs(weekOf)
     .add(6, 'day')
     .format('D')}`;

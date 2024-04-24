@@ -1,7 +1,5 @@
 'use client';
 
-import dayjs, { Dayjs } from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
 import { createEvent } from '@/lib/actions';
 import {
   ConfigProvider,
@@ -14,6 +12,8 @@ import {
 } from 'antd';
 import type { TimeRangePickerProps, GetProps } from 'antd';
 import { useState, useTransition } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
 
 const { RangePicker } = DatePicker;
@@ -29,7 +29,7 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
 
   /* Convert the date and range picker props to formatted Dayjs times */
   const datePickerValueProps = {
-    getValueFromEvent: (inputDate: Dayjs | null) => inputDate?.format(),
+    getValueFromEvent: (inputDate: Dayjs | null) => inputDate?.toISOString(),
     getValueProps: (inputDate: string | undefined) => ({
       value: inputDate ? dayjs(inputDate) : '',
     }),
@@ -37,7 +37,7 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
 
   const rangePickerValueProps = {
     getValueFromEvent: (inputDate: Dayjs[] | null) =>
-      inputDate?.map((date: Dayjs) => date?.format()),
+      inputDate?.map((date: Dayjs) => date?.toISOString()),
     getValueProps: (inputDate: string[] | undefined) => ({
       value: inputDate
         ? inputDate.map((input) => (input ? dayjs(input) : ''))
@@ -59,7 +59,7 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
     const weekOf = dayjs(formData.dateTime[0])
       .isoWeekday(1)
       .startOf('day')
-      .format();
+      .toISOString();
     const eventData = { ...formData, id, weekOf };
     const pk = `EVENT#${id}`;
     const eventCardData = {

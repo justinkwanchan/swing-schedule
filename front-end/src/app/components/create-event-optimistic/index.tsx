@@ -12,9 +12,9 @@ type Props = {
 export default function CreateEventOptimistic({ events }: Props) {
   const eventCards = events.map((event) => ({
     pk: event.pk,
-    weekOf: dayjs(event.weekOf).format(),
+    weekOf: dayjs(event.weekOf).toISOString(),
     eventName: event.eventName,
-    startDateTime: dayjs(event.startDateTime).format(),
+    startDateTime: dayjs(event.startDateTime).toISOString(),
   }));
 
   const [optimisticEvents, setOptimisticEvent] = useOptimistic<

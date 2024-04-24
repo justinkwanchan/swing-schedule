@@ -7,7 +7,7 @@ import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
 
 export default async function Home() {
-  const weekOf = dayjs().isoWeekday(1).startOf('day').format();
+  const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
   const events = await getEventsByWeekOf(weekOf);
 
   return (
