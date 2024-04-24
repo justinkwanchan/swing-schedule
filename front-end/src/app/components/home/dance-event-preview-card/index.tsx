@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Card from './Card';
+import dayjs from 'dayjs';
 
 type Props = {
   isCarouseled: boolean;
@@ -7,6 +8,10 @@ type Props = {
 };
 
 export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
+  const eventLink = `events/event?id=${event.pk.slice(6)}&weekof=${dayjs(
+    event.weekOf
+  ).format('YYYY-MM-DD')}`;
+
   return (
     /* Card widths must match the grid column widths in /events/page.tsx
      * Carouseled cards include padding of 16px for small and 32px for large */
@@ -18,13 +23,13 @@ export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
       }`}
     >
       {/* Mobile view */}
-      <Link href={`events/${event.pk + event.sk}`} className="md:hidden">
+      <Link href={eventLink} className="md:hidden">
         <Card event={event} isDesktop={false} />
       </Link>
 
       {/* Desktop view */}
       <div className="hidden md:block">
-        <Card event={event} isDesktop={true} />
+        <Card event={event} isDesktop={true} eventLink={eventLink} />
       </div>
     </div>
   );

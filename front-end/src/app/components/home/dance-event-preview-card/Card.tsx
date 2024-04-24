@@ -6,11 +6,12 @@ import dayjs from 'dayjs';
 type Props = {
   event: EventFromDB;
   isDesktop: boolean;
+  eventLink?: string;
 };
 
-export default function Card({ event, isDesktop }: Props) {
+export default function Card({ event, isDesktop, eventLink = '' }: Props) {
   // const { id, image, datetime, title, organizer, location, address } = event;
-  const { pk, sk, eventName, startDateTime, location } = event;
+  const { eventName, startDateTime, location } = event;
 
   return (
     <div className="flex flex-col shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] rounded-2xl mb-4 md:shadow-none md:mb-0">
@@ -33,10 +34,7 @@ export default function Card({ event, isDesktop }: Props) {
           </div>
           {/* <p className="hidden md:block">{location}</p> */}
           {isDesktop && (
-            <Link
-              href={`events/${pk + sk}`}
-              className="underline text-cyan-400"
-            >
+            <Link href={eventLink} className="underline text-cyan-400">
               More info
             </Link>
           )}
