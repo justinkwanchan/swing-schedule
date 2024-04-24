@@ -1,19 +1,26 @@
 import PageTitleSection from '@/app/components/page-title-section';
 import DanceEventPreviewCard from '../components/home/dance-event-preview-card';
+import { getEventsByWeekOf } from '@/lib/actions';
+import dayjs from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
+dayjs.extend(isoWeek);
 
-export default function Events() {
+export default async function Events() {
   const pageDescription =
     'Your go-to guide for swing dance socials in Montreal! Explore upcoming events and connect with the local swing dance community.';
 
-  const tempEvent = {
-    id: 'cats78',
-    image: 'image',
-    datetime: 'FRI OCT 16 @ 7:30PM',
-    title: "Cat's Corner Weekly Dance",
-    organizer: "Cat's Corner",
-    location: 'Polish White Eagle Society',
-    address: '1956 Rue Frontenac, Montréal, QC H2K 2Z1',
-  };
+  const weekOf = dayjs().isoWeekday(1).startOf('day').format();
+  const events = await getEventsByWeekOf(weekOf);
+
+  // const tempEvent = {
+  //   id: 'cats78',
+  //   image: 'image',
+  //   datetime: 'FRI OCT 16 @ 7:30PM',
+  //   title: "Cat's Corner Weekly Dance",
+  //   organizer: "Cat's Corner",
+  //   location: 'Polish White Eagle Society',
+  //   address: '1956 Rue Frontenac, Montréal, QC H2K 2Z1',
+  // };
 
   return (
     <div className="flex flex-col items-center mb-12">
@@ -24,21 +31,14 @@ export default function Events() {
       <div
         className={`grid grid-cols-[repeat(auto-fit,_176px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
       >
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
-        <DanceEventPreviewCard isCarouseled={false} event={tempEvent} />
+        {/* <DanceEventPreviewCard isCarouseled={false} event={tempEvent} /> */}
+        {events.map((event) => (
+          <DanceEventPreviewCard
+            isCarouseled={false}
+            event={event}
+            key={event.pk + event.sk}
+          />
+        ))}
       </div>
     </div>
   );
