@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import locationPin from 'public/location-pin.svg';
+import dayjs from 'dayjs';
 
 type Props = {
-  event: EventDetails;
+  event: EventFromDB;
   isDesktop: boolean;
 };
 
 export default function Card({ event, isDesktop }: Props) {
-  const { id, image, datetime, title, organizer, location, address } = event;
+  // const { id, image, datetime, title, organizer, location, address } = event;
+  const { pk, sk, eventName, startDateTime, location } = event;
 
   return (
     <div className="flex flex-col shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] rounded-2xl mb-4 md:shadow-none md:mb-0">
@@ -16,11 +18,11 @@ export default function Card({ event, isDesktop }: Props) {
       <div className="bg-gray-100 w-full h-44 md:h-60 rounded-2xl mb-2"></div>
       <div className="mx-2 md:mx-0">
         <h3 className="text-red-500 font-medium text-xs mb-1 md:text-base md:mb-0">
-          {datetime}
+          {dayjs(startDateTime).format('ddd MMM D @ h:mma').toUpperCase()}
         </h3>
-        <h1 className="font-bold text-sm mb-2 md:text-lg">{title}</h1>
+        <h1 className="font-bold text-sm mb-2 md:text-lg">{eventName}</h1>
         <div className="text-sub-text-grey text-xs md:text-sm">
-          <p>By: {organizer}</p>
+          {/* <p>By: {organizer}</p> */}
           <div className="flex mt-1 mb-2 md:my-0">
             <Image
               src={locationPin}
@@ -29,9 +31,12 @@ export default function Card({ event, isDesktop }: Props) {
             />
             <p>{location}</p>
           </div>
-          <p className="hidden md:block">{address}</p>
+          {/* <p className="hidden md:block">{location}</p> */}
           {isDesktop && (
-            <Link href={`events/${id}`} className="underline text-cyan-400">
+            <Link
+              href={`events/${pk + sk}`}
+              className="underline text-cyan-400"
+            >
               More info
             </Link>
           )}

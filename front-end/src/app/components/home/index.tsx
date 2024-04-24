@@ -15,8 +15,8 @@ export default async function Home() {
       <HomeTitleSection events={events} />
 
       <div className="flex flex-col w-full md:w-4/5 mb-12 gap-12">
-        <PreviewSection title={SOCIAL_DANCES} />
-        <PreviewSection title={PREVIOUS_FLYERS} />
+        <PreviewSection title={SOCIAL_DANCES} events={events} />
+        <PreviewSection title={PREVIOUS_FLYERS} events={events} />
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import Card from './Card';
 
 type Props = {
   isCarouseled: boolean;
-  event: EventDetails;
+  event: EventFromDB;
 };
 
 export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
@@ -18,7 +18,7 @@ export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
       }`}
     >
       {/* Mobile view */}
-      <Link href={`events/${event.id}`} className="md:hidden">
+      <Link href={`events/${event.pk + event.sk}`} className="md:hidden">
         <Card event={event} isDesktop={false} />
       </Link>
 
