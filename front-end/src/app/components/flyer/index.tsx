@@ -1,11 +1,13 @@
-import { getEventsByWeekOf } from '@/lib/actions';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
 
-export default async function Flyer() {
+type Props = {
+  events: EventFromDB[];
+};
+
+export default async function Flyer({ events }: Props) {
   const weekOf = dayjs().isoWeekday(1).startOf('day').format();
-  const events = await getEventsByWeekOf(weekOf);
   const weekTitle = `${dayjs(weekOf).format('MMMM D')} - ${dayjs(weekOf)
     .add(6, 'day')
     .format('D')}`;

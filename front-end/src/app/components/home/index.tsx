@@ -1,11 +1,18 @@
 import HomeTitleSection from './home-title-section';
 import PreviewSection from './preview-section';
 import { SOCIAL_DANCES, PREVIOUS_FLYERS } from '@/lib/constants';
+import { getEventsByWeekOf } from '@/lib/actions';
+import dayjs from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
+dayjs.extend(isoWeek);
 
-export default function Home() {
+export default async function Home() {
+  const weekOf = dayjs().isoWeekday(1).startOf('day').format();
+  const events = await getEventsByWeekOf(weekOf);
+
   return (
     <>
-      <HomeTitleSection />
+      <HomeTitleSection events={events} />
 
       <div className="flex flex-col w-full md:w-4/5 mb-12 gap-12">
         <PreviewSection title={SOCIAL_DANCES} />
