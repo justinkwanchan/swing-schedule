@@ -29,7 +29,13 @@ export default function CreateEventOptimistic({ events }: Props) {
             dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
           );
         case 'DELETE':
-          return state.filter((event) => event.pk !== action.newEvent.pk);
+          return state.filter(
+            (event) =>
+              !(
+                event.pk === action.newEvent.pk &&
+                event.weekOf === action.newEvent.weekOf
+              )
+          );
         default:
           return state;
       }
