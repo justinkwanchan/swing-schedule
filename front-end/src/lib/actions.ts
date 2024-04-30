@@ -160,3 +160,23 @@ export async function getEventsByWeekOf(
       dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
     );
 }
+
+export async function getEvent(
+  id: string,
+  weekOf: string
+): Promise<EventFromDB> {
+  const response = await fetch(
+    'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/queryEvent',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, weekOf }),
+    }
+  );
+
+  const { event }: { event: EventFromDB } = await response.json();
+
+  return event;
+}

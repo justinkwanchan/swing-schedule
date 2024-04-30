@@ -8,8 +8,8 @@ type Props = {
 };
 
 export default function DanceEventPreviewCard({ isCarouseled, event }: Props) {
-  const eventLink = `events/event?id=${event.pk.slice(6)}&weekof=${dayjs(
-    event.weekOf
+  const eventLink = `events/${event.pk.slice(6)}&${dayjs(
+    event.startDateTime
   ).format('YYYY-MM-DD')}`;
 
   return (
