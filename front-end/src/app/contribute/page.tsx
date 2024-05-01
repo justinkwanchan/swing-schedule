@@ -76,9 +76,9 @@ export default function Contribute() {
           <h2 className="text-2xl font-medium mr-12">
             Ready to create your event?
           </h2>
-          <Link href="">
+          <Link href="/register">
             <button className="font-bold bg-[#BDFFF3] w-max px-8 py-4 rounded-2xl shadow-[4px_6px_8px_0_rgba(0,0,0,0.25)]">
-              Create Event
+              Register
             </button>
           </Link>
         </div>
