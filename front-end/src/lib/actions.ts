@@ -153,9 +153,7 @@ export async function getEventsByWeekOf(
   const { events }: { events: EventFromDB[] } = await response.json();
 
   return events
-    .filter(
-      (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
-    )
+    .filter((event) => !event.cancelled)
     .sort((a, b) =>
       dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
     );

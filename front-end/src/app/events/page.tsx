@@ -15,8 +15,12 @@ export default async function Events() {
   const pageDescription =
     'Your go-to guide for swing dance socials in Montreal! Explore upcoming events and connect with the local swing dance community.';
 
-  const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
+  const now = dayjs();
+  const weekOf = now.isoWeekday(1).startOf('day').toISOString();
   const events = await getEventsByWeekOf(weekOf);
+  const futureEvents = events.filter((event) =>
+    dayjs(event.endDateTime).isAfter(now)
+  );
 
   // const tempEvent = {
   //   id: 'cats78',
@@ -38,7 +42,7 @@ export default async function Events() {
         className={`grid grid-cols-[repeat(auto-fit,_176px)] justify-center gap-x-4 w-11/12 md:grid-cols-[repeat(auto-fit,_240px)] md:gap-8 md:w-4/5`}
       >
         {/* <DanceEventPreviewCard isCarouseled={false} event={tempEvent} /> */}
-        {events.map((event) => (
+        {futureEvents.map((event) => (
           <DanceEventPreviewCard
             isCarouseled={false}
             event={event}
