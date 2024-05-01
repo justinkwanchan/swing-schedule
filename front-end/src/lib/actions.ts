@@ -1,9 +1,11 @@
 'use server';
 
-import dayjs from 'dayjs';
 import { auth, signIn, signOut } from '@/auth';
 import { AuthError } from 'next-auth';
 import { revalidatePath } from 'next/cache';
+import dayjs from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
+dayjs.extend(isoWeek);
 
 export async function authenticate(
   prevState: string | undefined,
@@ -126,10 +128,11 @@ export async function getEventsByUser(): Promise<EventFromDB[]> {
   );
 
   const { events }: { events: EventFromDB[] } = await response.json();
+  const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
 
   return events
     .filter(
-      (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(dayjs())
+      (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(weekOf)
     )
     .sort((a, b) =>
       dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
