@@ -83,7 +83,7 @@ export async function createEvent(formData: CreateEventFormData) {
   const responseParsed = await response.json();
   console.log(responseParsed);
   revalidatePath('/');
-  revalidatePath('/create-event');
+  revalidatePath('/manage-events');
 }
 
 export async function cancelEvent(id: string, weekOf: string) {
@@ -107,7 +107,7 @@ export async function cancelEvent(id: string, weekOf: string) {
   const responseParsed = await response.json();
   console.log(responseParsed);
   revalidatePath('/');
-  revalidatePath('/create-event');
+  revalidatePath('/manage-events');
 }
 
 export async function getEventsByUser(): Promise<EventFromDB[]> {

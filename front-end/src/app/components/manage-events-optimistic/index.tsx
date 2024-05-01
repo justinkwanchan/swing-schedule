@@ -9,7 +9,7 @@ type Props = {
   events: EventFromDB[];
 };
 
-export default function CreateEventOptimistic({ events }: Props) {
+export default function ManageEventOptimistic({ events }: Props) {
   const eventCards = events.map((event) => ({
     pk: event.pk,
     weekOf: dayjs(event.weekOf).toISOString(),

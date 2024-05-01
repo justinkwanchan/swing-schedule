@@ -54,10 +54,10 @@ export default function Navbar({
           </Link>
         ) : (
           <Link
-            href="/create-event"
-            className={pathName === '/create-event' ? 'font-medium' : ''}
+            href="/manage-events"
+            className={pathName === '/manage-events' ? 'font-medium' : ''}
           >
-            CREATE EVENT
+            MANAGE EVENTS
           </Link>
         )}
       </div>
