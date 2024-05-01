@@ -1,9 +1,15 @@
+import { Metadata } from 'next';
+import { getEventsByWeekOf } from '@/lib/actions';
 import PageTitleSection from '@/app/components/page-title-section';
 import DanceEventPreviewCard from '../components/home/dance-event-preview-card';
-import { getEventsByWeekOf } from '@/lib/actions';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
+
+export const metadata: Metadata = {
+  title: 'Upcoming Events',
+  description: 'All of the upcoming local swing events',
+};
 
 export default async function Events() {
   const pageDescription =

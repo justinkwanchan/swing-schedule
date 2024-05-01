@@ -1,8 +1,14 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 
 import PageTitleSection from '@/app/components/page-title-section';
 import danceDude from 'public/dance-dude.svg';
+
+export const metadata: Metadata = {
+  title: 'Contribute',
+  description: 'How to begin contributing new events',
+};
 
 export default function Contribute() {
   const pageDescription =

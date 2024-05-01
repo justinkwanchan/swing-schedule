@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
 import PageTitleSection from '../components/page-title-section';
 import PreviousFlyerCard from '../components/home/previous-flyer-card';
+
+export const metadata: Metadata = {
+  title: 'Previous Flyers',
+  description: 'Previous flyers of all local dances',
+};
 
 export default function PreviousFlyers() {
   const pageDescription =
