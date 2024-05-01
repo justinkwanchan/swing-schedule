@@ -8,45 +8,28 @@ import locationPin from 'public/location-pin.svg';
 import Map from '@/app/components/map';
 import getCoords from '@/lib/getCoords';
 
+import { Metadata } from 'next';
 import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import { getEvent } from '@/lib/actions';
-dayjs.extend(isoWeek);
+import getEventFromParams from '@/lib/getIdAndWeekOfFromParams';
 
-// export function generateStaticParams() {
-//     const posts = getSortedPostsData()
+export async function generateMetadata({
+  params: { eventId },
+}: {
+  params: { eventId: string };
+}): Promise<Metadata> {
+  const event = await getEventFromParams(eventId);
 
-//     return posts.map((post) => ({
-//         postId: post.id
-//     }))
-// }
-
-// export function generateMetadata({ params }: { params: { postId: string } }) {
-
-//     const posts = getSortedPostsData()
-//     const { postId } = params
-
-//     const post = posts.find(post => post.id === postId)
-
-//     if (!post) {
-//         return {
-//             title: 'Post Not Found'
-//         }
-//     }
-
-//     return {
-//         title: post.title,
-//     }
-// }
+  return {
+    title: event.eventName,
+  };
+}
 
 export default async function Event({
-  params,
+  params: { eventId },
 }: {
   params: { eventId: string };
 }) {
-  const [id, rawWeekOf] = params.eventId.split('%26');
-  const weekOf = dayjs(rawWeekOf).isoWeekday(1).startOf('day').toISOString();
-  const event = await getEvent(id, weekOf);
+  const event = await getEventFromParams(eventId);
 
   // const eventInfo = {
   //   danceName: 'Swing Lapin Weekly Dance',
