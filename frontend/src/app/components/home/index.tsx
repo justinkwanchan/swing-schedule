@@ -5,12 +5,15 @@ import { getEventsByWeekOf } from '@/lib/actions';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 dayjs.extend(isoWeek);
+import { ConsoleLogger } from 'aws-amplify/utils';
 
 export default async function Home() {
   const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
   const events = await getEventsByWeekOf(weekOf);
-  console.log({ weekOf });
-  console.log({ events });
+
+  const logger = new ConsoleLogger('foo');
+  logger.info({ weekOf });
+  logger.info({ events });
 
   return (
     <>
