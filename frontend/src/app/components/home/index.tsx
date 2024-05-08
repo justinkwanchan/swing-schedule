@@ -9,6 +9,8 @@ dayjs.extend(isoWeek);
 export default async function Home() {
   const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
   const events = await getEventsByWeekOf(weekOf);
+  console.log({ weekOf });
+  console.log({ events });
 
   return (
     <>
