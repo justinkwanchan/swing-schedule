@@ -71,19 +71,27 @@ export async function createEvent(formData: CreateEventFormData) {
     repeatedUntil: adjustedRepeatedUntil,
     email,
   };
+  const fetchBody = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(createEventData),
+  };
 
   const response = await fetch(
     'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/createEvent',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(createEventData),
-    }
+    fetchBody
   );
   const responseParsed = await response.json();
-  console.log(responseParsed);
+
+  console.log({
+    message: 'createEvent is being called',
+    createEventData,
+    fetchBody,
+    responseParsed,
+  });
+
   revalidatePath('/');
   revalidatePath('/manage-events');
 }
@@ -96,18 +104,28 @@ export async function cancelEvent(id: string, weekOf: string) {
     cancelled: true,
   };
 
+  const fetchBody = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(deleteObj),
+  };
+
   const response = await fetch(
     'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/updateEvent',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(deleteObj),
-    }
+    fetchBody
   );
   const responseParsed = await response.json();
-  console.log(responseParsed);
+
+  console.log({
+    message: 'cancelEvent is being called',
+    id,
+    weekOf,
+    fetchBody,
+    responseParsed,
+  });
+
   revalidatePath('/');
   revalidatePath('/manage-events');
 }
@@ -115,69 +133,96 @@ export async function cancelEvent(id: string, weekOf: string) {
 export async function getEventsByUser(): Promise<EventFromDB[]> {
   const session = await auth();
   const email = session?.user?.email;
+  const fetchBody = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  };
 
   const response = await fetch(
     'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/queryEventsByUser',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    }
+    fetchBody
   );
 
   const { events }: { events: EventFromDB[] } = await response.json();
   const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
-
-  return events
+  const filteredSortedEvents = events
     .filter(
       (event) => !event.cancelled && dayjs(event.startDateTime).isAfter(weekOf)
     )
     .sort((a, b) =>
       dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
     );
+
+  console.log({
+    message: `getEventsByUser is being called by ${email}`,
+    fetchBody,
+    filteredSortedEvents,
+  });
+
+  return filteredSortedEvents;
 }
 
 export async function getEventsByWeekOf(
   weekOf: string
 ): Promise<EventFromDB[]> {
+  const fetchBody = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ weekOf }),
+  };
+
   const response = await fetch(
     'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/queryEventsByWeekOf',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ weekOf }),
-    }
+    fetchBody
   );
 
   const { events }: { events: EventFromDB[] } = await response.json();
-
-  return events
+  const filteredSortedEvents = events
     .filter((event) => !event.cancelled)
     .sort((a, b) =>
       dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
     );
+
+  console.log({
+    message: `getEventsByWeekOf is being called with weekOf: ${weekOf}`,
+    fetchBody,
+    filteredSortedEvents,
+  });
+
+  return filteredSortedEvents;
 }
 
 export async function getEvent(
   id: string,
   weekOf: string
 ): Promise<EventFromDB> {
+  const fetchBody = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id, weekOf }),
+  };
+
   const response = await fetch(
     'https://58vzjkrur5.execute-api.us-east-1.amazonaws.com/dev/queryEvent',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id, weekOf }),
-    }
+    fetchBody
   );
 
   const { event }: { event: EventFromDB } = await response.json();
+
+  console.log({
+    message: 'getEvent is being called',
+    id,
+    weekOf,
+    fetchBody,
+    event,
+  });
 
   return event;
 }
