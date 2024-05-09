@@ -4,11 +4,13 @@ import { SOCIAL_DANCES, PREVIOUS_FLYERS } from '@/lib/constants';
 import { getEventsByWeekOf } from '@/lib/actions';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
+import utc from 'dayjs/plugin/utc';
 dayjs.extend(isoWeek);
+dayjs.extend(utc);
 import { ConsoleLogger } from 'aws-amplify/utils';
 
 export default async function Home() {
-  const weekOf = dayjs().isoWeekday(1).startOf('day').toISOString();
+  const weekOf = dayjs().utc().isoWeekday(1).startOf('day').toISOString();
   const events = await getEventsByWeekOf(weekOf);
 
   const logger = new ConsoleLogger('foo');

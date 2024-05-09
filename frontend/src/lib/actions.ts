@@ -54,7 +54,7 @@ export async function logOut() {
 }
 
 export async function createEvent(formData: CreateEventFormData) {
-  const { dateTime, ...restOfData } = formData;
+  const { dateTime, weekOf, ...restOfData } = formData;
   const [startDateTime, endDateTime] = dateTime;
   const cancelled = false;
   const adjustedRepeatedUntil = restOfData.repeated
@@ -65,6 +65,7 @@ export async function createEvent(formData: CreateEventFormData) {
 
   const createEventData = {
     ...restOfData,
+    weekOf,
     startDateTime,
     endDateTime,
     cancelled,
@@ -87,8 +88,7 @@ export async function createEvent(formData: CreateEventFormData) {
 
   console.log({
     message: 'createEvent is being called',
-    createEventData,
-    fetchBody,
+    weekOf,
     responseParsed,
   });
 
@@ -118,13 +118,13 @@ export async function cancelEvent(id: string, weekOf: string) {
   );
   const responseParsed = await response.json();
 
-  console.log({
-    message: 'cancelEvent is being called',
-    id,
-    weekOf,
-    fetchBody,
-    responseParsed,
-  });
+  // console.log({
+  //   message: 'cancelEvent is being called',
+  //   id,
+  //   weekOf,
+  //   fetchBody,
+  //   responseParsed,
+  // });
 
   revalidatePath('/');
   revalidatePath('/manage-events');
@@ -156,11 +156,11 @@ export async function getEventsByUser(): Promise<EventFromDB[]> {
       dayjs(a.startDateTime).isAfter(dayjs(b.startDateTime)) ? 1 : -1
     );
 
-  console.log({
-    message: `getEventsByUser is being called by ${email}`,
-    fetchBody,
-    filteredSortedEvents,
-  });
+  // console.log({
+  //   message: `getEventsByUser is being called by ${email}`,
+  //   fetchBody,
+  //   filteredSortedEvents,
+  // });
 
   return filteredSortedEvents;
 }
@@ -190,8 +190,6 @@ export async function getEventsByWeekOf(
 
   console.log({
     message: `getEventsByWeekOf is being called with weekOf: ${weekOf}`,
-    fetchBody,
-    filteredSortedEvents,
   });
 
   return filteredSortedEvents;

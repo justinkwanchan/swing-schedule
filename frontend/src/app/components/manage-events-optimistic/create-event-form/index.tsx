@@ -14,7 +14,9 @@ import type { TimeRangePickerProps, GetProps } from 'antd';
 import { useState, useTransition } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
+import utc from 'dayjs/plugin/utc';
 dayjs.extend(isoWeek);
+dayjs.extend(utc);
 
 const { RangePicker } = DatePicker;
 
@@ -57,6 +59,7 @@ export default function CreateEventForm({ setOptimisticEvent }: Props) {
   function submitEvent(formData: CreateEventFormData) {
     const id = crypto.randomUUID();
     const weekOf = dayjs(formData.dateTime[0])
+      .utc()
       .isoWeekday(1)
       .startOf('day')
       .toISOString();
